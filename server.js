@@ -1,4 +1,7 @@
 // require some app
-const app = require('./app/app.js');
+const {fastify} = require('./app/app.js');
+
+// route todo
+const {getTodoRoute} = require('./route/todo_route.js')
   
-app.fastify.listen({port: 3000});
+fastify.listen({port: 3000});
