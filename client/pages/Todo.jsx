@@ -20,7 +20,7 @@ const Todo = () => {
                 <h1 className="xl:ml-[2em] xl:font-bold xl:mt-[1em] xl:text-xl">Inbox</h1>
 
                 {/* button add todo */}
-                <Link className="xl:flex xl:rounded-lg xl:pl-2 xl:mt-[1em] xl:pr-4 xl:justify-center xl:items-center xl:h-6  xl:bg-greenLight">
+                <Link to="/add" className="xl:flex xl:rounded-lg xl:pl-2 xl:mt-[1em] xl:pr-4 xl:justify-center xl:items-center xl:h-6  xl:bg-greenLight">
                     {/* icon add */}
                     <IoIosAdd color="white" size={20}/>
 
