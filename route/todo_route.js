@@ -1,12 +1,7 @@
-// require some app
-const app = require('../app/app.js');
+const TodoRoute = async (fastify,options) => {
+    fastify.get("/", async (req,rep) => {
+        return { hello: "World" };
+    });
+} 
 
-// get controller 
-const {getTodoController} = require('../controller/todo_controller.js');
-
-// getTodo route
-const getTodoRoute = app.fastify.get('/', getTodoController);
-
-module.exports = {
-    getTodoRoute
-}
+module.exports = TodoRoute;

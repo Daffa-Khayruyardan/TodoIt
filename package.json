@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "nodemon ./server.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,9 @@
   },
   "homepage": "https://github.com/Daffa-Khayruyardan/todo#readme",
   "dependencies": {
-    "fastify": "^4.26.2",
+    "fastify": "^4.27.0"
+  },
+  "devDependencies": {
     "nodemon": "^3.1.0"
   }
 }
