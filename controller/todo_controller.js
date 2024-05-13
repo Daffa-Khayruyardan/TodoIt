@@ -12,6 +12,21 @@ const indexTodo = async (req,res) => {
     }
 }
 
+// find one todo controller
+const findTodo = async (req,res) => {
+    // get params
+    const {id} = req.params;
+
+    // try catch
+    try{
+        const findTodoData = await todoModel.findById(id);
+        
+        res.status(200).json(findTodoData);
+    }catch(err) {
+        res.status(404).json({message: err})
+    }
+};
+
 // post todo controller
 const postTodo = async (req,res) => {
     // get request body
@@ -67,6 +82,7 @@ const delTodo = async (req,res) => {
 
 module.exports = {
     indexTodo,
+    findTodo,
     postTodo,
     putTodo,
     delTodo

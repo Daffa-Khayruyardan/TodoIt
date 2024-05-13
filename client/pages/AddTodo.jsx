@@ -7,9 +7,6 @@ const AddTodo = () => {
     // get data 
     const [getTitle,setTitle] = useState();
 
-    // create use navigate
-    const navigate = useNavigate();
-
     // debugging
     console.log(getTitle);
 
@@ -19,9 +16,6 @@ const AddTodo = () => {
         axios.post(`http://localhost:3000/todo/create?title=${getTitle}`)
             .then(res => console.log(res))
             .catch(err => console.log(err));
-
-        // redirect to todo page
-        navigate("/todo");
     }
 
     return(
@@ -45,9 +39,9 @@ const AddTodo = () => {
                     </Link>
 
                     {/* button yes */}
-                    <button onClick={() => handleSubmit()} type="submit" className="xl:border xl:px-4 xl:py-2 xl:rounded xl:text-white xl:bg-greenLight xl:border-greenLight">
+                    <Link to="/todo" onClick={() => handleSubmit()} className="xl:border xl:px-4 xl:py-2 xl:rounded xl:text-white xl:bg-greenLight xl:border-greenLight">
                         Add
-                    </button>
+                    </Link>
                 </div>
             </form>
         </div>

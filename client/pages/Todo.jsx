@@ -1,6 +1,6 @@
 // import packages
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 // import components
@@ -14,6 +14,12 @@ import { IoIosSettings } from "react-icons/io";
 const Todo = () => {
     // add todo visible condition
     const [todoData,setTodoData] = useState(null);
+
+    // search bar 
+    const [searchValue,setSearchValue] = useState();
+
+    // create use navigate
+    const navigate = useNavigate();
 
     // fetch api
     useEffect(() => {
@@ -32,6 +38,12 @@ const Todo = () => {
         window.location.reload();
     };
 
+    // handle edit
+    const handleData = () => {
+        navigate('/todo/add');
+        console.log("Hello")
+    };
+
     return(
         <div className="xl:flex-1 bg-silverLight">
             {/* title container */}
@@ -41,7 +53,7 @@ const Todo = () => {
 
                 {/* search input */}
                 <div className="xl:relative xl:mt-[1em]">
-                    <input type="text" placeholder="search" className="xl:focus:outline-greenLight xl:pl-[2.5em] xl:relative xl:rounded-2xl xl:w-[14em] xl:h-[2em]" />
+                    <input onChange={(e) => setSearchValue(e.target.value)} type="text" placeholder="search" className="xl:focus:outline-greenLight xl:pl-[2.5em] xl:relative xl:rounded-2xl xl:w-[14em] xl:h-[2em]" />
 
                     {/* search icon */}
                     <FaSearch size={15} className="xl:absolute xl:top-[0.6em] xl:left-4" />
@@ -51,8 +63,8 @@ const Todo = () => {
             {/* container content */}
             <div className="xl:h-[94vh] xl:overflow-y-scroll xl:flex-1 ">
                 {/* todo content here */}
-                {todoData && todoData.map(item => (
-                    <Card key={item._id} title={item.title} delData={() => handleDelete(item._id)} />
+                {todoData.map(item => (
+                    <Card itemId={item._id} key={item._id} title={item.title} delData={() => handleDelete(item._id)} editData={() => handleData()} />
                 ))}
             </div>
         </div>
