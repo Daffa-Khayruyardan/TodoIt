@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
-const Card = () => {
+const Card = ({title,delData}) => {
     return (
-        <div className="xl:flex xl:cursor-pointer xl:shadow-md xl:justify-between xl:items-center xl:bg-white xl:mt-[2em] xl:mr-[4em] xl:ml-[2em] xl:pl-[2em] xl:pt-[1.2em] xl:pb-[1.2em]">
+        <div className="xl:flex xl:cursor-pointer xl:shadow-md xl:justify-between xl:items-center xl:bg-white xl:mt-[1.5em] xl:mr-[4em] xl:ml-[2em] xl:pl-[2em] xl:pt-[1.2em] xl:pb-[1.2em]">
             {/* name of todo */}
-            <h1>Hello</h1>
+            <h1>{title}</h1>
 
             {/* container modify */}
             <div className="xl:flex xl:pr-10 xl:justify-between xl:items-cente xl:w-40 xl:h-full">
@@ -22,7 +22,7 @@ const Card = () => {
                 {/* conteiner delete */}
                 <Link className="xl:flex xl:justify-center xl:rounded-full xl:px-2 xl:py-2 xl:items-center xl:cursor-pointer xl:hover:bg-greenLightDying w-10 h-9">
                     {/* delete */}
-                    <MdDelete size={18} />
+                    <MdDelete onClick={delData} size={18} />
                 </Link>
             </div>
         </div>

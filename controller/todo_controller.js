@@ -1,14 +1,14 @@
 // import model
-const {todoModel} = require("../model/todo_model");
+const todoModel = require("../model/todo_model");
 
 // index controller
 const indexTodo = async (req,res) => {
     try{
         const indexTodoData = await todoModel.find();
 
-        res.json(indexTodoData);
+        res.status(200).json(indexTodoData);
     }catch (err) {
-        console.log("Error occured: ", err);
+        res.status(404).json({message: err});
     }
 }
 
@@ -27,9 +27,9 @@ const postTodo = async (req,res) => {
     try{
         const postTodoData = await newTodo.save();
 
-        res.json(postTodoData);
+        res.status(200).json(postTodoData);
     }catch (err) {
-        console.log("Err occured: ", err);
+        res.status(404).json({message: err});
     }
 }
 
@@ -42,11 +42,11 @@ const putTodo = async (req,res) => {
     const {title} = req.body;
 
     try{
-        const putTodoData = await todoModel.findOneAndUpdate({id: id}, {title: title});
+        const putTodoData = await todoModel.findByIdAndUpdate(id, {title}, {new:true});
 
-        res.json(putTodoData);
+        res.status(200).json(putTodoData);
     }catch (err) {
-        console.log("Error occured: ", err);
+        res.status(404).json({message: err});
     }
 }
 
@@ -57,11 +57,11 @@ const delTodo = async (req,res) => {
 
     try{
         // delete data from params
-        const delTodoData = await todoModel.deleteOne({id: id});
+        const delTodoData = await todoModel.findByIdAndDelete(id);
 
-        res.json(delTodoData);
+        res.status(200).json(delTodoData);
     }catch (err) {
-        console.log("Error occured: ", err);
+        res.status(404).json({message: err});
     }
 }
 
