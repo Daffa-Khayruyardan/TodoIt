@@ -15,7 +15,11 @@ const Header = () => {
 
             {/* others group */}
             <div className="xl:pr-[3em]">
-                <IoIosSettings size={20} className="xl:cursor-pointer" />
+                {/* setting button container */}
+                <div className="xl:rounded-full xl:flex xl:justify-center xl:items-center xl:hover:bg-greenLightDying w-8 h-8">
+                    <IoIosSettings size={20} className="xl:cursor-pointer" />
+                </div>
+                
             </div>
         </header>
     )

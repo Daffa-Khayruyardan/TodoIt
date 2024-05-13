@@ -10,6 +10,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Todo from "../pages/Todo";
 import Favorite from "../pages/Favorite";
+import AddTodo from "../pages/AddTodo";
 
 const App = () => {
   return(
@@ -24,6 +25,7 @@ const App = () => {
       <Route path="/" element={<HomeLayout />}>
         <Route path="todo" element={<Todo />} />
         <Route path="favorite" element={<Favorite />} />
+        <Route path="add" element={<AddTodo />} />
       </Route>
     </Routes>
   )
