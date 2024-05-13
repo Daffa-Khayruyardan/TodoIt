@@ -9,7 +9,7 @@ import HomeLayout from "../layout/HomeLayout";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Todo from "../pages/Todo";
-import Favorite from "../pages/Favorite";
+import EditTodo from "../pages/EditTodo";
 import AddTodo from "../pages/AddTodo";
 
 const App = () => {
@@ -25,6 +25,7 @@ const App = () => {
       <Route path="/" element={<HomeLayout />}>
         <Route path="todo" element={<Todo />} />
         <Route path="todo/add" element={<AddTodo />} />
+        <Route path="todo/edit/:id" element={<EditTodo />} />
       </Route>
     </Routes>
   )

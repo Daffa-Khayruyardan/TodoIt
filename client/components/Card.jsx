@@ -20,7 +20,7 @@ const Card = ({title,delData,editData,itemId}) => {
             {/* container modify */}
             <div className="xl:flex xl:pr-10 xl:justify-between xl:items-cente xl:w-40 xl:h-full">
                 {/* container modify */}
-                <Link to="/todo/add" onClick={editData} className="xl:flex xl:justify-center xl:rounded-full xl:px-2 xl:py-2 xl:items-center xl:cursor-pointer hover:bg-greenLightDying xl:mr-[2em] w-10 h-9">
+                <Link to={`/todo/edit/${itemId}`} onClick={editData} className="xl:flex xl:justify-center xl:rounded-full xl:px-2 xl:py-2 xl:items-center xl:cursor-pointer hover:bg-greenLightDying xl:mr-[2em] w-10 h-9">
                     {/* edit  */}
                     <FaEdit  size={18} />
                 </Link>

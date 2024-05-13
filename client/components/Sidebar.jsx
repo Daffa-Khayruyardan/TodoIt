@@ -16,7 +16,8 @@ const Sidebar = () => {
 
     // condition active link
     const InboxLink = pathname === "/todo";
-    const FavoritesLink = pathname === "/todo/add";
+    const AddLink = pathname === "/todo/add";
+    const EditLink = pathname === "/todo/edit";
 
     return(
         <aside className="h-[100vh] shadow-md w-[18.5vw]">
@@ -32,8 +33,8 @@ const Sidebar = () => {
             {/* todo link */}
             <LinkButton text="Inbox" to="/todo" icon={<FaInbox size={20} color={`${InboxLink ? "white" : ""}`} />} />
 
-            {/* favorite link */}
-            <LinkButton text="Add" to="/todo/add" icon={<IoIosAddCircle size={20} color={`${FavoritesLink ? "white" : ""}`}/>} />
+            {/* add link */}
+            <LinkButton text="Add" to="/todo/add" icon={<IoIosAddCircle size={20} color={`${AddLink ? "white" : ""}`}/>} />
         </aside>
     )
 }

@@ -38,12 +38,6 @@ const Todo = () => {
         window.location.reload();
     };
 
-    // handle edit
-    const handleData = () => {
-        navigate('/todo/add');
-        console.log("Hello")
-    };
-
     return(
         <div className="xl:flex-1 bg-silverLight">
             {/* title container */}
