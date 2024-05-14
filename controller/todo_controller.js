@@ -30,15 +30,14 @@ const findTodo = async (req,res) => {
 // post todo controller
 const postTodo = async (req,res) => {
     // get request body
-    const { id,title } = req.query;
+    const { title } = req.query;
 
     // insert new value
     const newTodo = todoModel({
-        id: id,
         title: title 
     });
 
-
+    // catch if there was an error
     try{
         const postTodoData = await newTodo.save();
 

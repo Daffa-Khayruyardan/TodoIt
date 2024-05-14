@@ -11,6 +11,7 @@ mongoose
 
 // import route
 const todoRoute = require("./route/todo_route");
+const authRoute = require("./route/auth_route");
 
 // define app
 const app = express();
@@ -23,6 +24,7 @@ app.use(cors({
 
 // import user routes
 app.use("/todo", todoRoute);
+app.use('/user', authRoute);
 
 // run server at port 3000
 app.listen(process.env.PORT, () => {
