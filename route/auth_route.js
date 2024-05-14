@@ -13,4 +13,9 @@ router.post('/signup', signup);
 // login route 
 router.post('/login', login);
 
+router.get('/coba', (req,res) => {
+    res.cookie('jwt','12345');
+    res.send("Hello");
+});
+
 module.exports = router;

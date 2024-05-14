@@ -2,6 +2,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 require("dotenv").config();
 
@@ -21,10 +22,13 @@ app.use(bodyParser.json())
 app.use(cors({
     origin: '*'
 }))
+app.use(cookieParser());
 
 // import user routes
 app.use("/todo", todoRoute);
 app.use('/user', authRoute);
+
+
 
 // run server at port 3000
 app.listen(process.env.PORT, () => {

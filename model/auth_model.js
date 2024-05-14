@@ -5,12 +5,11 @@ const {mongoose} = require("../config/db");
 const authSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true, 
-        unique: true
+        required: false, 
     },
     password: {
         type: String,
-        required: true
+        required: false
     }
 }) 
 

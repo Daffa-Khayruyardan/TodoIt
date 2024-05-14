@@ -11,25 +11,22 @@ const signup = async (req,res) => {
     // get body request
     const {username,password} = req.body;
     
-    // catch error if there was error
     try{
-        // make hash password
-        const hashPassword = await bcrypt.hash(password,10);
+        // create hashpassword
+        const hashPassword =  await bcrypt.hash(password,10);
 
-        // create 
-        const newAuth = authModel({
-            username: username,
+        const signupData = await new authModel({
+            username,
             password: hashPassword
-        })
+        });
 
-        // save new file
-        const signupData = await newAuth.save();
+        const signupPost = await signupData.save();
 
-        // give response status
-        res.status(200).json(signupData);
+        console.log(hashPassword);
+
+        res.status(200).json(signupPost);
     }catch (err) {
-        console.log(err);
-        res.status(404).json({message: err});
+        res.status(404).json({msg: "Not successfully"});
     }
 };
 
@@ -38,35 +35,31 @@ const login = async (req,res) => {
     // get body request
     const {username,password} = req.body;
 
-    // catch if there was error
-    try {
-        // find username
-        const findUserdata = await authModel.findOne({
-            username: username
-        })
+    // secret key
+    const {SECRET_KEY} = process.env;
 
-        // make sure user same 
-        if(findUserdata) {
-            // get password 
-            const comparePassword = await bcrypt.compare(password, findUserdata.password)
+    try{
+        // find if user exist 
+        const userExist = await authModel.findOne({username});
 
-            // make condition if password compare true
-            if(comparePassword) {
-                const userToken = jwt.sign({
-                    username: username,
-                }, process.env.SECRET_KEY);
-            }else {
-                res.status(400).json({error: "Password does not match"})
-            }
-        }else {
-            // if user does not exist
-            res.status(400).json({error: "User don't exist"})
+        // compare password
+        const comparePassword = await bcrypt.compare(password,userExist.password);
+
+        // if user exist and password match
+        if(userExist && comparePassword) {
+            // generate jwt
+            const genToken = jwt.sign({username}, SECRET_KEY, {expiresIn: '1h'});
+
+            // set cookies
+            res.cookie('jwt_Key', genToken);
+
+            res.status(200).json({msg: "Successfully"});
         }
 
-        
     }catch (err) {
-        res.status(404).json({message: err});
+        res.status(404).json({msg: "Not successfully"});
     }
+
 }
 
 module.exports = {

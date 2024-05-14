@@ -3,6 +3,7 @@ const todoModel = require("../model/todo_model");
 
 // index controller
 const indexTodo = async (req,res) => {
+    // try and catch if there was error
     try{
         const indexTodoData = await todoModel.find();
 
