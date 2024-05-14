@@ -1,9 +1,12 @@
-const fastify = require("fastify")();
+const express = require("express");
 
-const TodoRoute = require("./route/todo_route");
+// import route
+const todoRoute = require("./route/todo_route");
 
-fastify.register(TodoRoute);
+const app = express();
 
-fastify.listen({ port: 3000 }, () => {
-    console.log("Server running")
+app.use("/todo", todoRoute);
+
+app.listen(3000, () => {
+    console.log(`server running at port 3000`)
 })

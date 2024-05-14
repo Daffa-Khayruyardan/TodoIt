@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/Daffa-Khayruyardan/todo#readme",
   "dependencies": {
-    "fastify": "^4.27.0"
+    "express": "^4.19.2"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"

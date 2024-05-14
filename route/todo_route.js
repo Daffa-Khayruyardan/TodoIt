@@ -1,7 +1,8 @@
-const TodoRoute = async (fastify,options) => {
-    fastify.get("/", async (req,rep) => {
-        return { hello: "World" };
-    });
-} 
+const express = require('express');
+const router = express.Router();
 
-module.exports = TodoRoute;
+router.get('/user', (req, res) => {
+    res.send("Hello world");
+});
+
+module.exports = router;
