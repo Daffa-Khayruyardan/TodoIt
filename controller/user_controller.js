@@ -1,10 +1,10 @@
 // import model
-const {todoModel} = require("../model/todo_model");
+const {userModel} = require("../model/user_model");
 
 // index controller
-const indexTodo = async (req,res) => {
+const indexUser = async (req,res) => {
     try{
-        const indexTodoData = await todoModel.find();
+        const indexTodoData = await userModel.find();
 
         res.json(indexTodoData);
     }catch (err) {
@@ -13,14 +13,16 @@ const indexTodo = async (req,res) => {
 }
 
 // post todo controller
-const postTodo = async (req,res) => {
+const postUser = async (req,res) => {
     // get request body
-    const { id,title } = req.query;
+    const { id,email,username,password } = req.query;
 
     // insert new value
-    const newTodo = todoModel({
+    const newTodo = userModel({
         id: id,
-        title: title 
+        email: email,
+        username: username,
+        password: password
     });
 
 
@@ -34,7 +36,7 @@ const postTodo = async (req,res) => {
 }
 
 // put todo controller
-const putTodo = async (req,res) => {
+const putUser = async (req,res) => {
     // get params
     const {id} = req.params;
 
@@ -42,7 +44,7 @@ const putTodo = async (req,res) => {
     const {title} = req.body;
 
     try{
-        const putTodoData = await todoModel.findOneAndUpdate({id: id}, {title: title});
+        const putTodoData = await userModel.findOneAndUpdate({id: id}, {title: title});
 
         res.json(putTodoData);
     }catch (err) {
@@ -51,13 +53,13 @@ const putTodo = async (req,res) => {
 }
 
 // delete todo controller
-const delTodo = async (req,res) => {
+const delUser = async (req,res) => {
     // get items 
     const {id} = req.params;
 
     try{
         // delete data from params
-        const delTodoData = await todoModel.deleteOne({id: id});
+        const delTodoData = await userModel.deleteOne({id: id});
 
         res.json(delTodoData);
     }catch (err) {
@@ -66,8 +68,8 @@ const delTodo = async (req,res) => {
 }
 
 module.exports = {
-    indexTodo,
-    postTodo,
-    putTodo,
-    delTodo
+    indexUser,
+    postUser,
+    putUser,
+    delUser
 }

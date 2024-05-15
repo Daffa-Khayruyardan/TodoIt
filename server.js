@@ -8,6 +8,7 @@ mongoose
 
 // import route
 const todoRoute = require("./route/todo_route");
+const userRoute = require("./route/User_route");
 
 // define app
 const app = express();
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ extended: true }))
 
 // import user routes
 app.use("/todo", todoRoute);
+app.use("/user", userRoute);
 
 // run server at port 3000
 app.listen(process.env.PORT, () => {
