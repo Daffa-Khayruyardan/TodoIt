@@ -1,6 +1,9 @@
 // import some packages 
 import { Link } from "react-router-dom";
 
+// import reacts icons
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
 const Card = () => {
     return (
@@ -9,10 +12,19 @@ const Card = () => {
             <h1>Hello</h1>
 
             {/* container modify */}
-            <Link className="xl:flex xl:justify-center xl:rounded-lg xl:items-center xl:cursor-pointer bg-red-500 xl:mr-[2em] w-10 h-9">
-                {/* edit  */}
-                <h1 className="xl:text-white">Edit</h1>
-            </Link>
+            <div className="xl:flex xl:pr-10 xl:justify-between xl:items-cente xl:w-40 xl:h-full">
+                {/* container modify */}
+                <Link className="xl:flex xl:justify-center xl:rounded-full xl:px-2 xl:py-2 xl:items-center xl:cursor-pointer hover:bg-greenLightDying xl:mr-[2em] w-10 h-9">
+                    {/* edit  */}
+                    <FaEdit size={18} />
+                </Link>
+
+                {/* conteiner delete */}
+                <Link className="xl:flex xl:justify-center xl:rounded-full xl:px-2 xl:py-2 xl:items-center xl:cursor-pointer xl:hover:bg-greenLightDying w-10 h-9">
+                    {/* delete */}
+                    <MdDelete size={18} />
+                </Link>
+            </div>
         </div>
     )
 }

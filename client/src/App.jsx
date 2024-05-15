@@ -24,8 +24,7 @@ const App = () => {
       {/* homepage layout */}
       <Route path="/" element={<HomeLayout />}>
         <Route path="todo" element={<Todo />} />
-        <Route path="favorite" element={<Favorite />} />
-        <Route path="add" element={<AddTodo />} />
+        <Route path="todo/add" element={<AddTodo />} />
       </Route>
     </Routes>
   )

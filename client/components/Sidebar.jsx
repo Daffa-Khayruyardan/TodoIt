@@ -7,7 +7,7 @@ import LinkButton from "./LinkButton";
 
 // import icons
 import { LuListTodo } from "react-icons/lu";
-import { FaStar } from "react-icons/fa";
+import { IoIosAddCircle } from "react-icons/io";
 import { FaInbox } from "react-icons/fa6";
 
 const Sidebar = () => {
@@ -16,7 +16,7 @@ const Sidebar = () => {
 
     // condition active link
     const InboxLink = pathname === "/todo";
-    const FavoritesLink = pathname === "/favorite";
+    const FavoritesLink = pathname === "/todo/add";
 
     return(
         <aside className="h-[100vh] shadow-md w-[18.5vw]">
@@ -33,7 +33,7 @@ const Sidebar = () => {
             <LinkButton text="Inbox" to="/todo" icon={<FaInbox size={20} color={`${InboxLink ? "white" : ""}`} />} />
 
             {/* favorite link */}
-            <LinkButton text="Favorites" to="/favorite" icon={<FaStar size={20} color={`${FavoritesLink ? "white" : ""}`}/>} />
+            <LinkButton text="Add" to="/todo/add" icon={<IoIosAddCircle size={20} color={`${FavoritesLink ? "white" : ""}`}/>} />
         </aside>
     )
 }

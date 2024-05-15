@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 // import components 
 import Sidebar from "../components/Sidebar";
-import Header from "../components/Header";
+
 
 const HomeLayout = () => {
     return(
@@ -11,10 +11,8 @@ const HomeLayout = () => {
             {/* sidebar menu */}
             <Sidebar />
 
-            <div className="flex flex-1 flex-col">
-                <Header />
-                <Outlet />
-            </div>
+            {/* children */}
+            <Outlet />
         </div>
     )
 }

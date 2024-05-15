@@ -7,6 +7,8 @@ import Card from "../components/Card";
 
 // import icons
 import { IoIosAdd } from "react-icons/io";
+import { FaSearch } from "react-icons/fa";
+import { IoIosSettings } from "react-icons/io";
 
 const Todo = () => {
     // add todo visible condition
@@ -19,14 +21,13 @@ const Todo = () => {
                 {/* title of pages */}
                 <h1 className="xl:ml-[2em] xl:font-bold xl:mt-[1em] xl:text-xl">Inbox</h1>
 
-                {/* button add todo */}
-                <Link to="/add" className="xl:flex xl:rounded-lg xl:pl-2 xl:mt-[1em] xl:pr-4 xl:justify-center xl:items-center xl:h-6  xl:bg-greenLight">
-                    {/* icon add */}
-                    <IoIosAdd color="white" size={20}/>
+                {/* search input */}
+                <div className="xl:relative xl:mt-[1em]">
+                    <input type="text" placeholder="search" className="xl:focus:outline-greenLight xl:pl-[2.5em] xl:relative xl:rounded-2xl xl:w-[14em] xl:h-[2em]" />
 
-                    {/* name button */}
-                    <h1 className="xl:text-white ">Add</h1>
-                </Link>
+                    {/* search icon */}
+                    <FaSearch size={15} className="xl:absolute xl:top-[0.6em] xl:left-4" />
+                </div>
             </div>
 
             {/* content of todo here */}
