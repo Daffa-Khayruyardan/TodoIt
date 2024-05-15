@@ -10,13 +10,6 @@ mongoose.connect(DB_URL)
     .then(() => console.log("MongoDB connected"))
     .catch((err) => console.log(`Error occured: ${err}`));
 
-// create database schem
-const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: false
-    }
-})
 
 // export db config
 module.exports = {
