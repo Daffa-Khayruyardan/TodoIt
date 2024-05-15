@@ -10,7 +10,6 @@ mongoose.connect(DB_URL)
     .then(() => console.log("MongoDB connected"))
     .catch((err) => console.log(`Error occured: ${err}`));
 
-
 // export db config
 module.exports = {
     mongoose

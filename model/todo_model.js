@@ -1,14 +1,21 @@
-const {todo} = require("../schema/todo_schema");
+// imoprt database 
+const {mongoose} = require("../config/db");
 
-const newTodo = new todo({
-    title: "First data",
+// define schema
+const Schema = mongoose.Schema;
+
+// make todo schema
+const todoSchema = new Schema({
+    title: {
+        type: String,
+        required: false 
+    }
 })
 
-newTodo.save()
-    .then(todo => console.log("Created"))
-    .catch(err => console.log(err));
+// make model 
+const todoModel = mongoose.model("todo", todoSchema);
 
-// export models
+// exports schema
 module.exports = {
-    newTodo
+    todoModel 
 }

@@ -16,6 +16,6 @@ const app = express();
 app.use("/todo", todoRoute);
 
 // run server at port 3000
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
     console.log(`server running at port 3000`)
 })
