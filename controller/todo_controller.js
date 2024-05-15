@@ -2,39 +2,69 @@
 const {todoModel} = require("../model/todo_model");
 
 // index controller
-const indexTodo = (req,res) => {
-    todoModel.find()
-        .then(data => res.json(data))
-        .catch(err => console.log("Error occured: ", err));
+const indexTodo = async (req,res) => {
+    try{
+        const indexTodoData = await todoModel.find();
+
+        res.json(indexTodoData);
+    }catch (err) {
+        console.log("Error occured: ", err);
+    }
 }
 
 // post todo controller
-const postTodo = (req,res) => {
+const postTodo = async (req,res) => {
     // get request body
-    const { title } = req.query;
+    const { id,title } = req.query;
 
     // insert new value
     const newTodo = todoModel({
+        id: id,
         title: title 
     });
 
-    newTodo.save()
-        .then(res => console.log("Post succesfully created"))
-        .catch(err => console.log("Error occured: ", err));
 
-    res.send("Success");
+    try{
+        const postTodoData = await newTodo.save();
+
+        res.json(postTodoData);
+    }catch (err) {
+        console.log("Err occured: ", err);
+    }
 }
 
 // put todo controller
-const putTodo = (req,res) => {
+const putTodo = async (req,res) => {
     // get params
     const {id} = req.params;
 
-    res.send(success);
+    try{
+        const putTodoData = await todoModel.findOneAndUpdate({id: id});
+
+        res.json(putTodoData);
+    }catch (err) {
+        console.log("Error occured: ", err);
+    }
+}
+
+// delete todo controller
+const delTodo = async (req,res) => {
+    // get items 
+    const {id} = req.params;
+
+    try{
+        // delete data from params
+        const delTodoData = await todoModel.deleteOne({id: id});
+
+        res.json(delTodoData);
+    }catch (err) {
+        console.log("Error occured: ", err);
+    }
 }
 
 module.exports = {
     indexTodo,
     postTodo,
-    putTodo
+    putTodo,
+    delTodo
 }

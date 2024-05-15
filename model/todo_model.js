@@ -6,6 +6,10 @@ const Schema = mongoose.Schema;
 
 // make todo schema
 const todoSchema = new Schema({
+    id: {
+        type: Number,
+        required: false
+    },
     title: {
         type: String,
         required: false 

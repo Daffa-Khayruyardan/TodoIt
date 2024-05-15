@@ -1,6 +1,6 @@
 // import some packages
 const express = require("express");
-const dotenv = require("dotenv").config();
+require("dotenv").config();
 
 // import db config
 const { mongoose } = require("./config/db");
@@ -11,6 +11,9 @@ const todoRoute = require("./route/todo_route");
 
 // define app
 const app = express();
+
+// use midlleware plugins
+app.use(express.urlencoded({ extended: true }))
 
 // import user routes
 app.use("/todo", todoRoute);
