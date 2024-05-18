@@ -1,5 +1,5 @@
 // import some packages
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from 'axios';
 
@@ -11,7 +11,10 @@ const AddTodo = () => {
     const [contentData,setContentData] = useState();
 
     // get modified data
-    const [modifyData,setModifyData] = useState();
+    const [modifyTitle,setModifyTitle] = useState();
+
+    // initiate use navigate
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get(`http://localhost:3000/api/todo/${id}`)
@@ -24,12 +27,18 @@ const AddTodo = () => {
 
     // handle submit changes 
     const handleSubmitChanges = () => {
-        axios.put(`http://localhost:3000/api/todo/${id}`, {title: modifyData})
+        axios.put(`http://localhost:3000/api/todo/${id}`, {title: modifyTitle})
             .then(res => console.log(succesfully))
             .catch(err => console.log("error")); 
+
+        // navigate to another page
+        navigate('/todo')
     };
 
-    console.log(modifyData);
+    // handle cancel 
+    const handleCancel = () => {
+        navigate('/todo');
+    }
 
     return(
         <div className="xl:flex xl:justify-center xl:items-center xl:bg-silverLight xl:flex-1">
@@ -42,19 +51,19 @@ const AddTodo = () => {
                 <p className="xl:pt-[1em] xl:pl-[2.1em]">Edit existing activities enter here</p>
 
                 {/* input field */}
-                <input onChange={(e) => setModifyData(e.target.value)} type="text" placeholder="Title" defaultValue={contentData} className="xl:h-10 xl:pl-4 xl:rounded xl:ml-[1.9em] xl:mt-[1em] xl:w-[82%] xl:input xl:bg-greenLightDying xl:focus:outline-none" />
+                <input onChange={(e) => setModifyTitle(e.target.value)} type="text" placeholder="Title" defaultValue={contentData} className="xl:h-10 xl:pl-4 xl:rounded xl:ml-[1.9em] xl:mt-[1em] xl:w-[82%] xl:input xl:bg-greenLightDying xl:focus:outline-none" />
 
                 {/* button container */}
                 <div className="xl:flex xl:justify-between xl:ml-8 xl:mr-10 xl:items-center xl:mt-[1.4em]">
                     {/* button cancel */}
-                    <Link to="/todo" className="xl:border xl:px-4 xl:py-2 xl:rounded xl:border-greenLight">
+                    <button onClick={handleCancel} className="xl:border xl:px-4 xl:py-2 xl:rounded xl:border-greenLight">
                         Cancel
-                    </Link>
+                    </button>
 
                     {/* button yes */}
-                    <Link to="/todo" onClick={() => handleSubmitChanges()} className="xl:border xl:px-4 xl:py-2 xl:rounded xl:text-white xl:bg-greenLight xl:border-greenLight">
+                    <button onClick={handleSubmitChanges} className="xl:border xl:px-4 xl:py-2 xl:rounded xl:text-white xl:bg-greenLight xl:border-greenLight">
                         Add
-                    </Link>
+                    </button>
                 </div>
             </form>
         </div>

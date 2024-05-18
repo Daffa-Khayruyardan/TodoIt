@@ -7,9 +7,7 @@ import axios from 'axios';
 import Card from "../components/Card";
 
 // import icons
-import { IoIosAdd } from "react-icons/io";
 import { FaSearch } from "react-icons/fa";
-import { IoIosSettings } from "react-icons/io";
 
 const Todo = () => {
     // add todo visible condition

@@ -5,17 +5,37 @@ import axios from 'axios';
 
 const AddTodo = () => {
     // get data 
-    const [getTitle,setTitle] = useState();
+    const [getTitle,setTitle] = useState('');
 
-    // debugging
-    console.log(getTitle);
+    // initiate use navigate
+    const navigate = useNavigate();
 
     // create handle submit
     const handleSubmit = () => {
-        // submit using axios post 
-        axios.post(`http://localhost:3000/api/todo/?title=${getTitle}`)
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
+        if(getTitle === '') {
+            // submit using axios post when no data inside input field
+            axios.post(`http://localhost:3000/api/todo/?title=${'untitled'}`)
+                .then(res => console.log(res))
+                .catch(err => console.log(err)); 
+
+            // navigate to another page
+            navigate('/todo')
+        }else {
+            // submit using axios post 
+            axios.post(`http://localhost:3000/api/todo/?title=${getTitle}`)
+                .then(res => console.log(res))
+                .catch(err => console.log(err));
+
+            // navigate to another page
+            navigate('/todo')
+        }
+
+        
+    }
+
+    // handlle cancel add
+    const handleCancel = () => {
+        navigate('/todo');
     }
 
     return(
@@ -34,14 +54,14 @@ const AddTodo = () => {
                 {/* button container */}
                 <div className="xl:flex xl:justify-between xl:ml-8 xl:mr-10 xl:items-center xl:mt-[1.4em]">
                     {/* button cancel */}
-                    <Link to="/todo" className="xl:border xl:px-4 xl:py-2 xl:rounded xl:border-greenLight">
+                    <button onClick={handleCancel} className="xl:border xl:px-4 xl:py-2 xl:rounded xl:border-greenLight">
                         Cancel
-                    </Link>
+                    </button>
 
                     {/* button yes */}
-                    <Link to="/todo" onClick={() => handleSubmit()} className="xl:border xl:px-4 xl:py-2 xl:rounded xl:text-white xl:bg-greenLight xl:border-greenLight">
+                    <button onClick={handleSubmit} className="xl:border xl:px-4 xl:py-2 xl:rounded xl:text-white xl:bg-greenLight xl:border-greenLight">
                         Add
-                    </Link>
+                    </button>
                 </div>
             </form>
         </div>

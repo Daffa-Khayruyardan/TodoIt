@@ -60,7 +60,7 @@ const putTodo = async (req,res) => {
         // response after update data
         const putTodoData = await todoModel.findByIdAndUpdate(id, {title}, {new:true});
 
-        // 
+        // update existing data
         res.status(200).json(putTodoData);
     }catch (err) {
         res.status(404).json({message: err});
