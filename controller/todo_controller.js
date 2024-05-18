@@ -57,8 +57,10 @@ const putTodo = async (req,res) => {
     const {title} = req.body;
 
     try{
+        // response after update data
         const putTodoData = await todoModel.findByIdAndUpdate(id, {title}, {new:true});
 
+        // 
         res.status(200).json(putTodoData);
     }catch (err) {
         res.status(404).json({message: err});
@@ -74,8 +76,10 @@ const delTodo = async (req,res) => {
         // delete data from params
         const delTodoData = await todoModel.findByIdAndDelete(id);
 
+        // response after completed delete data
         res.status(200).json(delTodoData);
     }catch (err) {
+        // response failed delete data 
         res.status(404).json({message: err});
     }
 }

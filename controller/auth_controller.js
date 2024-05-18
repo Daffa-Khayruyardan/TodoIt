@@ -64,10 +64,15 @@ const login = async (req,res) => {
             // set cookies
             res.cookie('jwt_Key', genToken);
 
+            // 
             res.status(200).json({msg: "Successfully"});
+        }else {
+            // 
+            res.status(404).json({msg: "Incorrect user and password"});
         }
 
     }catch (err) {
+        // 
         res.status(404).json({msg: "Not successfully"});
     }
 
