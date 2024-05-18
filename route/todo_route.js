@@ -3,13 +3,13 @@ const express = require('express');
 const router = express.Router();
 
 // import controller
-const {indexTodo, findTodo, postTodo, putTodo, delTodo} = require("../controller/todo_controller");
+const {showTodo, indexTodo, postTodo, putTodo, delTodo} = require("../controller/todo_controller");
 
 // get todo index 
-router.get('/todo', indexTodo);
+router.get('/todo', showTodo);
 
 // find one todo
-router.get('/todo/:id', findTodo)
+router.get('/todo/:id', indexTodo)
 
 // post todo
 router.post('/todo', postTodo);

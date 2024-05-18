@@ -19,16 +19,12 @@ const app = express();
 
 // use midlleware plugins
 app.use(bodyParser.json())
-app.use(cors({
-    origin: '*'
-}))
+app.use(cors({origin: '*'}))
 app.use(cookieParser());
 
 // import user routes
 app.use("/api", todoRoute);
 app.use('/user', authRoute);
-
-
 
 // run server at port 3000
 app.listen(process.env.PORT, () => {

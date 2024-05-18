@@ -2,7 +2,7 @@
 const todoModel = require("../model/todo_model");
 
 // index controller
-const indexTodo = async (req,res) => {
+const showTodo = async (req,res) => {
     // try and catch if there was error
     try{
         const indexTodoData = await todoModel.find();
@@ -14,7 +14,7 @@ const indexTodo = async (req,res) => {
 }
 
 // find one todo controller
-const findTodo = async (req,res) => {
+const indexTodo = async (req,res) => {
     // get params
     const {id} = req.params;
 
@@ -81,8 +81,8 @@ const delTodo = async (req,res) => {
 }
 
 module.exports = {
+    showTodo,
     indexTodo,
-    findTodo,
     postTodo,
     putTodo,
     delTodo

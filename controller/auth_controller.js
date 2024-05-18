@@ -12,20 +12,31 @@ const signup = async (req,res) => {
     const {username,password} = req.body;
     
     try{
-        // create hashpassword
-        const hashPassword =  await bcrypt.hash(password,10);
+        // if username already exist
+        const getUsername = await authModel.findOne({username: username});
 
-        const signupData = await new authModel({
-            username,
-            password: hashPassword
-        });
+        // if username already exist
+        if(getUsername) {
+            res.status(500).json({msg: "Username already exist"});
+        }else {
+            // create hashpassword
+            const hashPassword =  await bcrypt.hash(password,10);
+    
+            // create new data
+            const signupData = await new authModel({
+                username,
+                password: hashPassword
+            });
+    
+            // save data 
+            const signupPost = await signupData.save();
+    
+            // send response
+            res.status(200).json(signupPost);
+        }
 
-        const signupPost = await signupData.save();
-
-        console.log(hashPassword);
-
-        res.status(200).json(signupPost);
     }catch (err) {
+        // send bad response 
         res.status(404).json({msg: "Not successfully"});
     }
 };
@@ -42,7 +53,7 @@ const login = async (req,res) => {
         // find if user exist 
         const userExist = await authModel.findOne({username});
 
-        // compare password
+        // compare existing password
         const comparePassword = await bcrypt.compare(password,userExist.password);
 
         // if user exist and password match
