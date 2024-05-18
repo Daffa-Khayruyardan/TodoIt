@@ -14,7 +14,7 @@ const AddTodo = () => {
     const [modifyData,setModifyData] = useState();
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/todo/${id}`)
+        axios.get(`http://localhost:3000/api/todo/${id}`)
             .then(res => setContentData(res.data.title))
             .catch(err => console.log(err));
     }, [])
@@ -24,11 +24,9 @@ const AddTodo = () => {
 
     // handle submit changes 
     const handleSubmitChanges = () => {
-        axios.put(`http://localhost:3000/todo/edit/${id}`, {title: modifyData})
+        axios.put(`http://localhost:3000/api/todo/${id}`, {title: modifyData})
             .then(res => console.log(succesfully))
             .catch(err => console.log("error")); 
-
-        
     };
 
     console.log(modifyData);

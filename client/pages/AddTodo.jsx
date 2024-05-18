@@ -13,7 +13,7 @@ const AddTodo = () => {
     // create handle submit
     const handleSubmit = () => {
         // submit using axios post 
-        axios.post(`http://localhost:3000/todo/create?title=${getTitle}`)
+        axios.post(`http://localhost:3000/api/todo/?title=${getTitle}`)
             .then(res => console.log(res))
             .catch(err => console.log(err));
     }

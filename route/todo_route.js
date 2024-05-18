@@ -6,19 +6,19 @@ const router = express.Router();
 const {indexTodo, findTodo, postTodo, putTodo, delTodo} = require("../controller/todo_controller");
 
 // get todo index 
-router.get('/', indexTodo);
+router.get('/todo', indexTodo);
 
 // find one todo
-router.get('/:id', findTodo)
+router.get('/todo/:id', findTodo)
 
 // post todo
-router.post('/create', postTodo);
+router.post('/todo', postTodo);
 
 // put todo
-router.put('/edit/:id', putTodo);
+router.put('/todo/:id', putTodo);
 
 // del todo
-router.delete('/delete/:id', delTodo);
+router.delete('/todo/:id', delTodo);
 
 
 module.exports = router;

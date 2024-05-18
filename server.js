@@ -25,7 +25,7 @@ app.use(cors({
 app.use(cookieParser());
 
 // import user routes
-app.use("/todo", todoRoute);
+app.use("/api", todoRoute);
 app.use('/user', authRoute);
 
 

@@ -23,7 +23,7 @@ const Todo = () => {
 
     // fetch api
     useEffect(() => {
-        axios.get("http://localhost:3000/todo")
+        axios.get("http://localhost:3000/api/todo")
             .then(res => setTodoData(res.data))
             .catch(err => console.log(err));
         
@@ -34,7 +34,7 @@ const Todo = () => {
 
     // handle delete 
     const handleDelete = (itemId) => {
-        axios.delete(`http://localhost:3000/todo/delete/${itemId}`);
+        axios.delete(`http://localhost:3000/api/todo/${itemId}`);
         window.location.reload();
     };
 
