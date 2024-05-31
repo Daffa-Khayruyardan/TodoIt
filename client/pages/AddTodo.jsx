@@ -8,7 +8,7 @@ const AddTodo = () => {
     const [getTitle,setTitle] = useState('');
 
     // initiate use navigate
-    const navigate = useNavigate();
+const navigate = useNavigate();
 
     // create handle submit
     const handleSubmit = () => {

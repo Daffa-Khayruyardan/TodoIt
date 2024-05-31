@@ -6,10 +6,12 @@ const authSchema = new mongoose.Schema({
     email: {
         type: String,
         required: false, 
+        unique: true,
     },
     username: {
         type: String,
         required: false, 
+        uniqeu: true,
     },
     password: {
         type: String,

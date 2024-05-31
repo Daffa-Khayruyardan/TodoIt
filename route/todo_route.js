@@ -9,7 +9,7 @@ const {authJWT} = require("../middleware/auth_middleware");
 const {showTodo, indexTodo, postTodo, putTodo, delTodo} = require("../controller/todo_controller");
 
 // get todo index 
-router.get('/todo', authJWT , showTodo);
+router.get('/todo', showTodo);
 
 // find one todo
 router.get('/todo/:id', indexTodo)
