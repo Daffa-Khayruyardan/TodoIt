@@ -3,6 +3,10 @@ const {mongoose} = require("../config/db");
 
 // make todo schema
 const authSchema = new mongoose.Schema({
+    email: {
+        type: String,
+        required: false, 
+    },
     username: {
         type: String,
         required: false, 
@@ -14,4 +18,4 @@ const authSchema = new mongoose.Schema({
 }) 
 
 // exports model
-module.exports = mongoose.model("auth", authSchema);
+module.exports = mongoose.model("user", authSchema);

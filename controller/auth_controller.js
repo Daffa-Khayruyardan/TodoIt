@@ -9,49 +9,45 @@ const authModel = require("../model/auth_model");
 // register controller
 const signup = async (req,res) => {
     // get body request
-    const {username,password} = req.body;
+    const {email, username,password} = req.body;
     
-    try{
-        // if username already exist
-        const getUsername = await authModel.findOne({username: username});
+    try {
+        // find username in database
+        const findEmail = await authModel.findOne({email}); 
 
-        // if username already exist
-        if(getUsername) {
-            res.status(500).json({msg: "Username already exist"});
-        }else {
-            // create hashpassword
-            const hashPassword =  await bcrypt.hash(password,10);
-    
-            // create new data
-            const signupData = await new authModel({
-                username,
-                password: hashPassword
-            });
-    
-            // save data 
-            const signupPost = await signupData.save();
-    
-            // send response
-            res.status(200).json(signupPost);
-        }
+        // if email not found
+        if(findEmail) return res.status(400).json({msg: "Email already exist"});
 
+        // encrypt password
+        const hashPassword = await bcrypt.hash(password, 10);
+
+        // create new user
+        const newUser = authModel({
+            email: email,
+            username: username,
+            password: hashPassword
+        })
+
+        // save new insert data
+        const newData = await newUser.save();
+
+        res.status(200).json({newData});
     }catch (err) {
-        // send bad response 
-        res.status(404).json({msg: "Not successfully"});
+        res.status(201).json({msg: `Error occured, ${err}`})
     }
 };
 
 // login controller 
 const login = async (req,res) => {
     // get body request
-    const {username,password} = req.body;
+    const {email,password} = req.body;
 
     // secret key
     const {SECRET_KEY} = process.env;
 
     try{
         // find if user exist 
-        const userExist = await authModel.findOne({username});
+        const userExist = await authModel.findOne({email});
 
         // compare existing password
         const comparePassword = await bcrypt.compare(password,userExist.password);
@@ -59,21 +55,21 @@ const login = async (req,res) => {
         // if user exist and password match
         if(userExist && comparePassword) {
             // generate jwt
-            const genToken = jwt.sign({username}, SECRET_KEY, {expiresIn: '1h'});
+            const genToken = jwt.sign({userExist}, SECRET_KEY, {expiresIn: '1h'});
 
             // set cookies
             res.cookie('jwt_Key', genToken);
 
-            // 
+            // send return value success
             res.status(200).json({msg: "Successfully"});
         }else {
-            // 
+            // return value incorrect user and password 
             res.status(404).json({msg: "Incorrect user and password"});
         }
 
     }catch (err) {
-        // 
-        res.status(404).json({msg: "Not successfully"});
+        // send error messages
+        res.status(404).json({msg: `Error occured: ${err}`});
     }
 
 }
