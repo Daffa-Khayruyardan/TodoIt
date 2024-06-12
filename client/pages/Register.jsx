@@ -24,17 +24,16 @@ const Register = () => {
         e.preventDefault();
 
         try {
-            await axios.post(`http://localhost:3000/api/signup?username=${username}&email=${email}&password=${password}`)
-            setMessage("Success");
+            await axios.post(`http://localhost:3000/api/signup?email=${email}&username=${username}&password=${password}`)
             navigate('/todo');
         }catch (err) {
+            console.log(err);
+
             if(err.response.data.msg === "email exist") {
                 setEmailMSG("email already in used");
-            }
-            
-            if(err.response.data.msg === "username exist") {
+            }else if(err.response.data.msg === "username exist") {
                 setUsernameMSG("username already in used");
-            }   
+            }
         }
     }
 
@@ -52,13 +51,13 @@ const Register = () => {
             {/* create login form */}
             <form onSubmit={handleSignup} className="xl:mt-[1.5em] xl:flex xl:flex-col ">
                 {/* input username */}
-                <input onChange={(e) => setUsername(e.target.value)} className="xl:border xl:focus:outline-greenLight xl:bg-greenLightDying xl:p-1 xl:mt-[0.7em] xl:pl-[0.8em] xl:rounded-sm xl:w-[20em] xl:h-[2.4em]" placeholder="Email" name="email" type="text"/>
+                <input onChange={(e) => setEmail(e.target.value)} className="xl:border xl:focus:outline-greenLight xl:bg-greenLightDying xl:p-1 xl:mt-[0.7em] xl:pl-[0.8em] xl:rounded-sm xl:w-[20em] xl:h-[2.4em]" placeholder="Email" name="email" type="text"/>
                 
                 {/* error label */}
                 <label className="xl:pl-1 text-red-500">{emailMSG}</label>
 
                 {/* input email */}
-                <input onChange={(e) => setEmail(e.target.value)} className="xl:border xl:focus:outline-greenLight xl:bg-greenLightDying xl:p-1 xl:mt-[0.7em] xl:pl-[0.8em] xl:rounded-sm w-[20em] xl:h-[2.4em]" placeholder="Username" name="username" type="text"/>
+                <input onChange={(e) => setUsername(e.target.value)} className="xl:border xl:focus:outline-greenLight xl:bg-greenLightDying xl:p-1 xl:mt-[0.7em] xl:pl-[0.8em] xl:rounded-sm w-[20em] xl:h-[2.4em]" placeholder="Username" name="username" type="text"/>
                 
                 {/* error label */}
                 <label className="xl:pl-1 text-red-500">{usernameMSG}</label>

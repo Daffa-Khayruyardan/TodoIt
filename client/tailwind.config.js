@@ -13,7 +13,7 @@ export default {
         greenLight: "#59e3b9",
         greenLightDying: "#ebf5f2",
         greenLightHover: "#64e8c0",
-        silverLight: "#F9F9F9",
+        silverLight: "#F8F8F8",
       }
     },
   },
