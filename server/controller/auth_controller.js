@@ -9,20 +9,17 @@ const authModel = require("../model/auth_model");
 // register controller
 const signup = async (req,res) => {
     // get body request
-    const {email, username,password} = req.query;
+    const {email ,password} = req.query;
     
     try {
+        // if email and password blank
+        if(!email || !password) return res.status(400).json({msg: "please fill"});
+
         // find email in database
         const findEmail = await authModel.exists({email: email}); 
 
-        // if email not found
+        // if email aleady exist 
         if(findEmail) return res.status(400).json({msg: "email exist"});
-
-        // find username in database
-        const findUsername = await authModel.exists({username: username}); 
-        
-        // if email not found
-        if(findUsername) return res.status(200).json({msg: "username exist"});
 
         // encrypt password
         const hashPassword = await bcrypt.hash(password, 10);

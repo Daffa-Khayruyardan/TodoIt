@@ -8,34 +8,44 @@ import { LuListTodo } from "react-icons/lu";
 
 const Register = () => {
     // get and set signup data
-    const [username,setUsername] = useState();
-    const [email,setEmail] = useState();
-    const [password,setPassword] = useState();
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');
 
-    // axios response message 
-    const [usernameMSG,setUsernameMSG] = useState();
-    const [emailMSG,setEmailMSG] = useState();
+    // error message 
+    const [errorDisplay,setErrorDisplay] = useState(false);
+    const [errorMSG,setErrorMSG] = useState('');
 
     // initiate use navigate
     const navigate = useNavigate();
 
     // handle signup
-    const handleSignup = async (e) => {
+    const handleSignup = (e) => {
         e.preventDefault();
 
-        try {
-            await axios.post(`http://localhost:3000/api/signup?email=${email}&username=${username}&password=${password}`)
-            navigate('/todo');
-        }catch (err) {
-            console.log(err);
-
-            if(err.response.data.msg === "email exist") {
-                setEmailMSG("email already in used");
-            }else if(err.response.data.msg === "username exist") {
-                setUsernameMSG("username already in used");
-            }
-        }
+        axios.post(`http://localhost:3000/api/signup?email=${email}&password=${password}`)
+            .then(resp => {
+                console.log(resp);
+            })
+            .catch(err => {
+                if(err.response.data.msg === 'email exist') {
+                    setErrorDisplay(true);
+                    setErrorMSG('email')
+                }else if(err.response.data.msg === 'please fill') {
+                    setErrorDisplay(true);
+                    setErrorMSG('blank');
+                }
+            })
     }
+
+    // errorMSGContent
+    let errorMSGContent;
+
+    // conditional error message 
+    if(errorMSG === 'email') {
+        errorMSGContent = <h1>Email already in used</h1>
+    }else if(errorMSG === 'blank') {
+        errorMSGContent = <h1>Please fill value in the blank</h1>
+    }   
 
     return(
         <div className="xl:flex xl:flex-col xl:flex-1 xl:items-center">
@@ -48,19 +58,15 @@ const Register = () => {
             {/*  description */}
             <h3 className="xl:mt-[0.5em] xl:text-sm">Todo app here now to help student manage daily task</h3>
 
+            {/* error message email*/}
+            <div className={`${errorDisplay ? "" : "hidden"} xl:mt-[1.2em] xl:bg-red-200 xl:border-2 xl:pl-5 xl:pt-2 xl:pb-2 xl:border-red-600 xl:w-[20em]`}>
+                {errorMSGContent}
+            </div>
+
             {/* create login form */}
-            <form onSubmit={handleSignup} className="xl:mt-[1.5em] xl:flex xl:flex-col ">
+            <form onSubmit={handleSignup} className="xl:mt-[1.2em] xl:flex xl:flex-col ">
                 {/* input username */}
                 <input onChange={(e) => setEmail(e.target.value)} className="xl:border xl:focus:outline-greenLight xl:bg-greenLightDying xl:p-1 xl:mt-[0.7em] xl:pl-[0.8em] xl:rounded-sm xl:w-[20em] xl:h-[2.4em]" placeholder="Email" name="email" type="text"/>
-                
-                {/* error label */}
-                <label className="xl:pl-1 text-red-500">{emailMSG}</label>
-
-                {/* input email */}
-                <input onChange={(e) => setUsername(e.target.value)} className="xl:border xl:focus:outline-greenLight xl:bg-greenLightDying xl:p-1 xl:mt-[0.7em] xl:pl-[0.8em] xl:rounded-sm w-[20em] xl:h-[2.4em]" placeholder="Username" name="username" type="text"/>
-                
-                {/* error label */}
-                <label className="xl:pl-1 text-red-500">{usernameMSG}</label>
 
                 {/* input password */}
                 <input onChange={(e) => setPassword(e.target.value)} className="xl:border xl:focus:outline-greenLight xl:bg-greenLightDying xl:p-1 mt-[0.7em] xl:pl-[0.8em] xl:rounded-sm w-[20em] xl:h-[2.4em]" placeholder="Password" name="password" type="text"/>
@@ -71,7 +77,7 @@ const Register = () => {
                 {/* create account link */}
                 <h1 className="xl:flex xl:justify-center xl:items-center xl:mt-[4em] xl:text-sm">
                     Already have account? 
-                    <Link type="submit" className="xl:pl-[1em] xl:text-greenLight">Log In</Link>
+                    <Link to="/login" type="submit" className="xl:pl-[1em] xl:text-greenLight">Log In</Link>
                 </h1>
             </form>
         </div>
