@@ -3,11 +3,18 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { useSelector, useDispatch } from "react-redux";
 
 // import reacts icons
 import { LuListTodo } from "react-icons/lu";
 
+// import login slice 
+import { login } from "../features/loginSlice";
+
 const Login = () => {
+    // initialize dispatch
+    const dispatch = useDispatch();
+
     // set form value
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
@@ -25,8 +32,13 @@ const Login = () => {
             .then(res => {
                 // if login has success to proceed
                 if(res.data === 'Login success') {
-                    setErrorDisplay(false);
+                    setErrorDisplay(!errorDisplay);
                 }
+
+                // if login success user can access protected 
+                if(res.data === 'Login success') {
+                    dispatch(login());
+                };
 
                 console.log(res);
             })
