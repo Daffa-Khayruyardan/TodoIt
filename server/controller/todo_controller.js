@@ -31,7 +31,7 @@ const indexTodo = async (req,res) => {
 // post todo controller
 const postTodo = async (req,res) => {
     // get request body
-    const { title } = req.query;
+    const { title } = req.body;
 
     // insert new value
     const newTodo = todoModel({

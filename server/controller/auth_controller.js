@@ -27,7 +27,6 @@ const signup = async (req,res) => {
         // create new user
         const newUser = authModel({
             email: email,
-            username: username,
             password: hashPassword
         })
 
@@ -43,32 +42,35 @@ const signup = async (req,res) => {
 // login controller 
 const login = async (req,res) => {
     // get body request
-    const {email,password} = req.body;
+    const {email,password} = req.query;
 
     // secret key
     const {SECRET_KEY} = process.env;
 
     try{
+        // if email and password blank
+        if(!email || !password) return res.status(400).json({msg: "please fill"});
+
         // find if user exist 
-        const userExist = await authModel.findOne({email});
+        const user = await authModel.findOne({email: email});
+
+        // error if email is invalid
+        if(!user) return res.status(400).json({msg: "invalid email"});
 
         // compare existing password
-        const comparePassword = await bcrypt.compare(password,userExist.password);
+        const comparePassword = await bcrypt.compare(password,user.password);
 
-        // if user exist and password match
-        if(userExist && comparePassword) {
-            // generate jwt
-            const genToken = jwt.sign({userExist}, SECRET_KEY, {expiresIn: '1h'});
+        // error if password is invalid
+        if(!comparePassword) return res.status(400).json({msg: "invalid password"});
 
-            // set cookies
-            res.cookie('jwt_Key', genToken);
+        // sign jwt
+        const jwtToken = await jwt.sign({user}, SECRET_KEY, { expiresIn: '1h' });
 
-            // send return value success
-            res.status(200).json({msg: "Successfully"});
-        }else {
-            // return value incorrect user and password 
-            res.status(404).json({msg: "Incorrect user and password"});
-        }
+        // set to cookie
+        res.cookie('token', jwtToken, { httpOnly: true });
+
+        // respond
+        res.status(200).json({msg: "Login success"});
 
     }catch (err) {
         // send error messages
