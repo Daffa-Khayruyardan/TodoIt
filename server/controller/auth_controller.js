@@ -42,7 +42,7 @@ const signup = async (req,res) => {
 // login controller 
 const login = async (req,res) => {
     // get body request
-    const {email,password} = req.query;
+    const {email,password} = req.body;
 
     // secret key
     const {SECRET_KEY} = process.env;

@@ -15,8 +15,12 @@ const authRoute = require("./route/auth_route");
 const app = express();
 
 // use midlleware plugins
-app.use(bodyParser.json())
-app.use(cors({origin: '*'}))
+app.use(bodyParser.json());
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+    optionSuccessStatus: 200
+}));
 app.use(cookieParser());
 
 // import user routes

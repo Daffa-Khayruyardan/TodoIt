@@ -21,17 +21,14 @@ const Login = () => {
         e.preventDefault();
 
         // post login form
-        axios.post(`http://localhost:3000/api/login?email=${email}&password=${password}`)
+        axios.post(`http://localhost:3000/api/login`, { email: email, password: password}, { withCredentials: true })
             .then(res => {
                 // if login has success to proceed
-                if(res.data === 'login success') {
+                if(res.data === 'Login success') {
                     setErrorDisplay(false);
                 }
 
                 console.log(res);
-                const token = Cookies.get('token');
-
-                console.log(token);
             })
             .catch(err => {
                 // if form in the blank state
