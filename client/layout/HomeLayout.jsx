@@ -11,9 +11,7 @@ const HomeLayout = () => {
 
     console.log('result: ', loginUser);
 
-    const user = lo;
-
-    return( user ? 
+    return( loginUser ? 
         <div className="flex overflow-hidden h-full w-full">
             {/* sidebar menu */}
             <Sidebar />

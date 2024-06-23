@@ -33,7 +33,7 @@ const signup = async (req,res) => {
         // save new insert data
         const newData = await newUser.save();
 
-        res.status(200).json({newData});
+        res.status(200).json({msg: 'signup success'});
     }catch (err) {
         res.status(201).json({msg: `Error occured, ${err}`})
     }

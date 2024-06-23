@@ -1,9 +1,9 @@
 // import some packages
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 // import reacts icons
 import { LuListTodo } from "react-icons/lu";
@@ -14,6 +14,9 @@ import { login } from "../features/loginSlice";
 const Login = () => {
     // initialize dispatch
     const dispatch = useDispatch();
+
+    // initialize navigate
+    const navigate = useNavigate();
 
     // set form value
     const [email,setEmail] = useState("");
@@ -31,14 +34,12 @@ const Login = () => {
         axios.post(`http://localhost:3000/api/login`, { email: email, password: password}, { withCredentials: true })
             .then(res => {
                 // if login has success to proceed
-                if(res.data === 'Login success') {
+                if(res.data.msg === 'Login success') {
                     setErrorDisplay(!errorDisplay);
-                }
-
-                // if login success user can access protected 
-                if(res.data === 'Login success') {
                     dispatch(login());
-                };
+
+                    navigate('/todo');
+                }
 
                 console.log(res);
             })

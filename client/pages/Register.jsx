@@ -24,7 +24,10 @@ const Register = () => {
 
         axios.post(`http://localhost:3000/api/signup?email=${email}&password=${password}`)
             .then(resp => {
-                console.log(resp);
+                // if signup success
+                if(resp.data.msg === 'signup success') {
+                    setErrorDisplay(false);
+                }
             })
             .catch(err => {
                 if(err.response.data.msg === 'email exist') {
