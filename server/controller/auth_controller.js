@@ -9,7 +9,7 @@ const authModel = require("../model/auth_model");
 // register controller
 const signup = async (req,res) => {
     // get body request
-    const {email ,password} = req.query;
+    const {email , username ,password} = req.body;
     
     try {
         // if email and password blank
@@ -21,12 +21,19 @@ const signup = async (req,res) => {
         // if email aleady exist 
         if(findEmail) return res.status(400).json({msg: "email exist"});
 
+        // find username 
+        const findUsername = await authModel.exists({username: username});
+
+        // if username already exist 
+        if(findUsername) return res.status(400).json({msg: "username exist"});
+
         // encrypt password
         const hashPassword = await bcrypt.hash(password, 10);
 
         // create new user
         const newUser = authModel({
             email: email,
+            username: username,
             password: hashPassword
         })
 
@@ -67,10 +74,10 @@ const login = async (req,res) => {
         const jwtToken = await jwt.sign({user}, SECRET_KEY, { expiresIn: '1h' });
 
         // set to cookie
-        res.cookie('token', jwtToken, { httpOnly: true });
+        res.cookie(user.username, jwtToken, { httpOnly: true });
 
         // respond
-        res.status(200).json({msg: "Login success"});
+        res.status(200).json(user);
 
     }catch (err) {
         // send error messages

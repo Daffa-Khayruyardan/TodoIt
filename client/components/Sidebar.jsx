@@ -1,9 +1,9 @@
 // import packages 
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // import components 
 import LinkButton from "./LinkButton";
-
 
 // import icons
 import { LuListTodo } from "react-icons/lu";
@@ -14,13 +14,16 @@ const Sidebar = () => {
     // get url location
     const {pathname} = useLocation();
 
+    // get current biodata
+    const currEmail = useSelector((state) => state.login.currEmail);
+    const currUsername = useSelector((state) => state.login.currUsername);
+
     // condition active link
     const InboxLink = pathname === "/todo";
     const AddLink = pathname === "/todo/add";
-    const EditLink = pathname === "/todo/edit";
 
     return(
-        <aside className="h-[100vh] shadow-md w-[18.5vw]">
+        <aside className="relative h-[100vh] shadow-md w-[20vw]">
             {/* app logo and title container */}
             <div className="xl:flex xl:mt-[1em] xl:items-center xl:ml-[1.4em] xl:mb-[1.6em]">
                 {/* logo */}
@@ -35,6 +38,13 @@ const Sidebar = () => {
 
             {/* add link */}
             <LinkButton text="Add" to="/todo/add" icon={<IoIosAddCircle size={20} color={`${AddLink ? "white" : ""}`}/>} />
+
+            {/* name container */}
+            <div className="xl:pl-2 pt-2 border-t-2 shadow-sm xl:absolute xl:w-full xl:h-16  bottom-0">
+                <img src="" alt="" />
+                <h1 className="xl:sm">{currEmail}</h1>
+                <h1 className="xl:sm">{currUsername}</h1>
+            </div>
         </aside>
     )
 }

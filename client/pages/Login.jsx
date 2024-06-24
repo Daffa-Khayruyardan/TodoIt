@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { LuListTodo } from "react-icons/lu";
 
 // import login slice 
-import { login } from "../features/loginSlice";
+import { setLogin,setCurrEmail,setCurrUsername } from "../features/loginSlice";
 
 const Login = () => {
     // initialize dispatch
@@ -25,7 +25,7 @@ const Login = () => {
     // set error display
     const [errorDisplay,setErrorDisplay] = useState(false);
     const [errorMSG,setErrorMSG] = useState('');
-    
+
     const handleSubmit = (e) => {
         // prevent submit 
         e.preventDefault();
@@ -34,10 +34,15 @@ const Login = () => {
         axios.post(`http://localhost:3000/api/login`, { email: email, password: password}, { withCredentials: true })
             .then(res => {
                 // if login has success to proceed
-                if(res.data.msg === 'Login success') {
-                    setErrorDisplay(!errorDisplay);
-                    dispatch(login());
+                if(res.data !== null) {
+                    // set error display off if visible before
+                    setErrorDisplay(false);
 
+                    // set curr email and username
+                    dispatch(setCurrEmail(res.data.email));
+                    dispatch(setCurrUsername(res.data.username));
+
+                    // navigate to home screen
                     navigate('/todo');
                 }
 

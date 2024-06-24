@@ -10,6 +10,7 @@ const Register = () => {
     // get and set signup data
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
+    const [username,setUsername] = useState('');
 
     // error message 
     const [errorDisplay,setErrorDisplay] = useState(false);
@@ -22,18 +23,24 @@ const Register = () => {
     const handleSignup = (e) => {
         e.preventDefault();
 
-        axios.post(`http://localhost:3000/api/signup?email=${email}&password=${password}`)
+        axios.post(`http://localhost:3000/api/signup`, {email: email, username: username, password: password})
             .then(resp => {
                 // if signup success
                 if(resp.data.msg === 'signup success') {
                     setErrorDisplay(false);
+
+                    navigate('/login');
                 }
             })
             .catch(err => {
                 if(err.response.data.msg === 'email exist') {
                     setErrorDisplay(true);
                     setErrorMSG('email')
-                }else if(err.response.data.msg === 'please fill') {
+                }else if(err.response.data.msg === 'username exist') {
+                    setErrorDisplay(true);
+                    setErrorMSG('username');
+                }
+                else if(err.response.data.msg === 'please fill') {
                     setErrorDisplay(true);
                     setErrorMSG('blank');
                 }
@@ -46,7 +53,10 @@ const Register = () => {
     // conditional error message 
     if(errorMSG === 'email') {
         errorMSGContent = <h1>Email already in used</h1>
-    }else if(errorMSG === 'blank') {
+    }else if(errorMSG === 'username'){
+        errorMSGContent = <h1>Username already in used</h1>
+    }
+    else if(errorMSG === 'blank') {
         errorMSGContent = <h1>Please fill value in the blank</h1>
     }   
 
@@ -68,8 +78,11 @@ const Register = () => {
 
             {/* create login form */}
             <form onSubmit={handleSignup} className="xl:mt-[1.2em] xl:flex xl:flex-col ">
-                {/* input username */}
+                {/* input email */}
                 <input onChange={(e) => setEmail(e.target.value)} className="xl:border xl:focus:outline-greenLight xl:bg-greenLightDying xl:p-1 xl:mt-[0.7em] xl:pl-[0.8em] xl:rounded-sm xl:w-[20em] xl:h-[2.4em]" placeholder="Email" name="email" type="text"/>
+                
+                {/* input username */}
+                <input onChange={(e) => setUsername(e.target.value)} className="xl:border xl:focus:outline-greenLight xl:bg-greenLightDying xl:p-1 mt-[0.7em] xl:pl-[0.8em] xl:rounded-sm w-[20em] xl:h-[2.4em]" placeholder="Username" name="username" type="text"/>
 
                 {/* input password */}
                 <input onChange={(e) => setPassword(e.target.value)} className="xl:border xl:focus:outline-greenLight xl:bg-greenLightDying xl:p-1 mt-[0.7em] xl:pl-[0.8em] xl:rounded-sm w-[20em] xl:h-[2.4em]" placeholder="Password" name="password" type="text"/>
