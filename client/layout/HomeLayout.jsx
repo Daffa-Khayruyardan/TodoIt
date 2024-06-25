@@ -7,10 +7,10 @@ import Sidebar from "../components/Sidebar";
 
 
 const HomeLayout = () => {
-    // const currUserToken = useSelector((state) => state.login.currUseToken);
+    const currUsername = localStorage.getItem('currUsername')
 
     // check if cookies exist 
-    const isLogged = document.cookie.includes(`daffakhayru=`);
+    const isLogged = document.cookie.includes(`${currUsername}=`);
 
 
     return( isLogged ? 

@@ -28,6 +28,10 @@ const Sidebar = () => {
         // set cookies to expire
         document.cookie = "daffakhayru" + "=; Max-Age=-99999999;";
 
+        // remove user info
+        localStorage.removeItem('currEmail');
+        localStorage.removeItem('currUsername');
+
         // reload page
         window.location.reload();
     };

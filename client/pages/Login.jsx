@@ -8,9 +8,6 @@ import { useDispatch } from "react-redux";
 // import reacts icons
 import { LuListTodo } from "react-icons/lu";
 
-// import login slice 
-import { setLogin,setCurrEmail,setCurrUsername } from "../features/loginSlice";
-
 const Login = () => {
     // initialize dispatch
     const dispatch = useDispatch();
@@ -39,8 +36,8 @@ const Login = () => {
                     setErrorDisplay(false);
 
                     // set curr email and username
-                    dispatch(setCurrEmail(res.data.email));
-                    dispatch(setCurrUsername(res.data.username));
+                    localStorage.setItem('currEmail', `${res.data.email}`);
+                    localStorage.setItem('currUsername', `${res.data.username}`);
 
                     // navigate to home screen
                     navigate('/todo');
