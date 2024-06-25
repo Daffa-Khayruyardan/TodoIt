@@ -14,17 +14,19 @@ const Todo = () => {
     const [todoData,setTodoData] = useState(null);
 
     // search bar 
-    const [searchValue,setSearchValue] = useState();
+    const [searchValue,setSearchValue] = useState('');
 
     // create use navigate
     const navigate = useNavigate();
+
+    // debugging cookies
+    console.log("name: ", document.cookie.includes('daffakhayru='));
 
     // fetch api
     useEffect(() => {
         axios.get("http://localhost:3000/api/todo")
             .then(res => setTodoData(res.data))
             .catch(err => console.log(err));
-        
     }, [])
 
     // data null return nothing
@@ -55,7 +57,11 @@ const Todo = () => {
             {/* container content */}
             <div className="xl:h-[94vh] xl:overflow-y-scroll xl:flex-1 ">
                 {/* todo content here */}
-                {todoData.map(item => (
+                {todoData.filter(item => {
+                    // filter item from search bar 
+                    return searchValue.toLocaleLowerCase() === '' ? item : item.title.toLowerCase().includes(searchValue);
+                }).map(item => (
+                    // show item in card 
                     <Card itemId={item._id} key={item._id} title={item.title} delData={() => handleDelete(item._id)} editData={() => handleData()} />
                 ))}
             </div>

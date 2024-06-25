@@ -62,7 +62,7 @@ const AddTodo = () => {
 
                     {/* button yes */}
                     <button onClick={handleSubmitChanges} className="xl:border xl:px-4 xl:py-2 xl:rounded xl:text-white xl:bg-greenLight xl:border-greenLight">
-                        Add
+                        change
                     </button>
                 </div>
             </form>

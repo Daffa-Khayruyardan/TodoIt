@@ -8,13 +8,13 @@ const AddTodo = () => {
     const [getTitle,setTitle] = useState('');
 
     // initiate use navigate
-    const navigate = useNavigate();
+const navigate = useNavigate();
 
     // create handle submit
     const handleSubmit = () => {
         if(getTitle === '') {
             // submit using axios post when no data inside input field
-            axios.post(`http://localhost:3000/api/todo/?title=${'untitled'}`)
+            axios.post(`http://localhost:3000/api/todo`, { title: 'untitled' })
                 .then(res => console.log(res))
                 .catch(err => console.log(err)); 
 
@@ -22,16 +22,14 @@ const AddTodo = () => {
             navigate('/todo')
         }else {
             // submit using axios post 
-            axios.post(`http://localhost:3000/api/todo/?title=${getTitle}`)
+            axios.post(`http://localhost:3000/api/todo`, { title: getTitle} )
                 .then(res => console.log(res))
                 .catch(err => console.log(err));
 
             // navigate to another page
             navigate('/todo')
         }
-
-        
-    }
+    };
 
     // handlle cancel add
     const handleCancel = () => {

@@ -6,7 +6,7 @@ import SideUser from "../components/SideUser";
 
 const UserLayout = () => {
     return(
-        <div className="flex ">
+        <div className="flex h-full w-full overflow-y-hidden ">
             <SideUser />
             <Outlet />
         </div>

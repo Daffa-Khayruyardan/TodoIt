@@ -1,6 +1,6 @@
 const SideUser = () => {
     return(
-        <div className="w-[46vw] h-screen bg-greenLight">
+        <div className="w-[46vw] h-[100vh] bg-greenLight">
             
         </div>
     )

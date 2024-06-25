@@ -7,75 +7,82 @@ const jwt = require("jsonwebtoken");
 const authModel = require("../model/auth_model");
 
 // register controller
-const signup = async (req,res) => {
+const signup = async (req,res) => { 
     // get body request
-    const {username,password} = req.body;
-    
-    try{
-        // if username already exist
-        const getUsername = await authModel.findOne({username: username});
 
-        // if username already exist
-        if(getUsername) {
-            res.status(500).json({msg: "Username already exist"});
-        }else {
-            // create hashpassword
-            const hashPassword =  await bcrypt.hash(password,10);
+    const {email , username ,password} = req.body;
     
-            // create new data
-            const signupData = await new authModel({
-                username,
-                password: hashPassword
-            });
-    
-            // save data 
-            const signupPost = await signupData.save();
-    
-            // send response
-            res.status(200).json(signupPost);
-        }
+    try {
+        // if email and password blank
+        if(!email || !password) return res.status(400).json({msg: "please fill"});
 
+        // find email in database
+        const findEmail = await authModel.exists({email: email}); 
+
+        // if email aleady exist 
+        if(findEmail) return res.status(400).json({msg: "email exist"});
+
+        // find username 
+        const findUsername = await authModel.exists({username: username});
+
+        // if username already exist 
+        if(findUsername) return res.status(400).json({msg: "username exist"});
+
+        // encrypt password
+        const hashPassword = await bcrypt.hash(password, 10);
+
+        // create new user
+        const newUser = authModel({
+            email: email,
+            username: username,
+            password: hashPassword
+        })
+
+        // save new insert data
+        const newData = await newUser.save();
+
+        res.status(200).json({msg: 'signup success'});
     }catch (err) {
-        // send bad response 
-        res.status(404).json({msg: "Not successfully"});
+        res.status(201).json({msg: `Error occured, ${err}`})
     }
 };
 
 // login controller 
 const login = async (req,res) => {
     // get body request
-    const {username,password} = req.body;
+    const {email, password} = req.body;
 
     // secret key
     const {SECRET_KEY} = process.env;
 
     try{
+        // if email and password blank
+        if(!email || !password) return res.status(400).json({msg: "please fill"});
+
         // find if user exist 
-        const userExist = await authModel.findOne({username});
+        const user = await authModel.findOne({email: email});
+
+        // error if email is invalid
+        if(!user) return res.status(400).json({msg: "invalid email"});
 
         // compare existing password
-        const comparePassword = await bcrypt.compare(password,userExist.password);
+        const comparePassword = await bcrypt.compare(password,user.password);
 
-        // if user exist and password match
-        if(userExist && comparePassword) {
-            // generate jwt
-            const genToken = jwt.sign({username}, SECRET_KEY, {expiresIn: '1h'});
+        // error if password is invalid
+        if(!comparePassword) return res.status(400).json({msg: "invalid password"});
 
-            // set cookies
-            res.cookie('jwt_Key', genToken);
+        // sign jwt
+        const jwtToken = await jwt.sign({user}, SECRET_KEY, { expiresIn: '1h' });
 
-            // 
-            res.status(200).json({msg: "Successfully"});
-        }else {
-            // 
-            res.status(404).json({msg: "Incorrect user and password"});
-        }
+        // set to cookie
+        res.cookie(user.username, jwtToken, { httpOnly: true });
+
+        // respond
+        res.status(200).json(user);
 
     }catch (err) {
-        // 
-        res.status(404).json({msg: "Not successfully"});
+         res.status(404).json({msg: "Not successfully"});
     }
-
 }
 
 module.exports = {
