@@ -9,18 +9,28 @@ import LinkButton from "./LinkButton";
 import { LuListTodo } from "react-icons/lu";
 import { IoIosAddCircle } from "react-icons/io";
 import { FaInbox } from "react-icons/fa6";
+import { CiLogout } from "react-icons/ci";
 
 const Sidebar = () => {
     // get url location
     const {pathname} = useLocation();
 
-    // get current biodata
-    const currEmail = useSelector((state) => state.login.currEmail);
-    const currUsername = useSelector((state) => state.login.currUsername);
-
     // condition active link
     const InboxLink = pathname === "/todo";
     const AddLink = pathname === "/todo/add";
+
+    // current username and email
+    const currEmail = localStorage.getItem('currEmail');
+    const currUsername = localStorage.getItem('currUsername');
+
+    // handle logout
+    const logout = () => {
+        // set cookies to expire
+        document.cookie = "daffakhayru" + "=; Max-Age=-99999999;";
+
+        // reload page
+        window.location.reload();
+    };
 
     return(
         <aside className="relative h-[100vh] shadow-md w-[20vw]">
@@ -41,9 +51,11 @@ const Sidebar = () => {
 
             {/* name container */}
             <div className="xl:pl-2 pt-2 border-t-2 shadow-sm xl:absolute xl:w-full xl:h-16  bottom-0">
-                <img src="" alt="" />
                 <h1 className="xl:sm">{currEmail}</h1>
                 <h1 className="xl:sm">{currUsername}</h1>
+
+                {/* logout button */}
+                <CiLogout className="cursor-pointer" onClick={() => logout()} />
             </div>
         </aside>
     )

@@ -19,9 +19,6 @@ const Todo = () => {
     // create use navigate
     const navigate = useNavigate();
 
-    // debugging cookies
-    console.log("name: ", document.cookie.includes('daffakhayru='));
-
     // fetch api
     useEffect(() => {
         axios.get("http://localhost:3000/api/todo")

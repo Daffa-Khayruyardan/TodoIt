@@ -6,6 +6,7 @@ export const loginSlice = createSlice({
     initialState: {
         currEmail: '',
         currUsername: '',
+        currUserToken: '',
     },
     reducers: {
         setCurrEmail: (state,action) => {
@@ -13,12 +14,15 @@ export const loginSlice = createSlice({
         },
         setCurrUsername: (state,action) => {
             state.currUsername = action.payload;
+        },
+        setCurrUserToken: (state,action) => {
+            state.currUsername = action.payload;
         }
     }
 })
 
 // export slice 
-export const { setLogin, setCurrEmail, setCurrUsername } = loginSlice.actions
+export const { setLogin, setCurrEmail, setCurrUsername, setCurrUserToken } = loginSlice.actions
 
 // export reducer
 export default loginSlice.reducer;

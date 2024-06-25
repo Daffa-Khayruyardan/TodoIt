@@ -1,11 +1,13 @@
 // import packages react
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 
 // import components
 import SideUser from "../components/SideUser";
 
 const UserLayout = () => {
-    return(
+    const isLogged = document.cookie.includes('daffakhayru=');
+
+    return(isLogged ? <Navigate to="/todo" /> :
         <div className="flex h-full w-full overflow-y-hidden ">
             <SideUser />
             <Outlet />
