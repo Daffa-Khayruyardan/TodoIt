@@ -9,6 +9,10 @@ import Card from "../components/Card";
 // import icons
 import { FaSearch } from "react-icons/fa";
 
+// import custom hooks
+import useFetch from "../hooks/useFetch";
+import useDelete from "../hooks/useDelete";
+
 const Todo = () => {
     // add todo visible condition
     const [todoData,setTodoData] = useState(null);
@@ -18,22 +22,8 @@ const Todo = () => {
 
     // create use navigate
     const navigate = useNavigate();
-
-    // fetch api
-    useEffect(() => {
-        axios.get("http://localhost:3000/api/todo")
-            .then(res => setTodoData(res.data))
-            .catch(err => console.log(err));
-    }, [])
-
-    // data null return nothing
-    if (todoData === null) return
-
-    // handle delete 
-    const handleDelete = (itemId) => {
-        axios.delete(`http://localhost:3000/api/todo/${itemId}`);
-        window.location.reload();
-    };
+    
+    const {data} = useFetch("http://localhost:3000/api/todo");
 
     return(
         <div className="xl:flex-1 bg-silverLight">
@@ -54,12 +44,12 @@ const Todo = () => {
             {/* container content */}
             <div className="xl:h-[94vh] xl:overflow-y-scroll xl:flex-1 ">
                 {/* todo content here */}
-                {todoData.filter(item => {
+                {Object.values(data).filter(item => {
                     // filter item from search bar 
                     return searchValue.toLocaleLowerCase() === '' ? item : item.title.toLowerCase().includes(searchValue);
                 }).map(item => (
                     // show item in card 
-                    <Card itemId={item._id} key={item._id} title={item.title} delData={() => handleDelete(item._id)} editData={() => handleData()} />
+                    <Card itemId={item._id} key={item._id} title={item.title} delData={() => useDelete(item._id,"http://localhost:3000/api/todo/")} editData={() => handleData()} />
                 ))}
             </div>
         </div>

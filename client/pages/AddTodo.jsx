@@ -8,13 +8,20 @@ const AddTodo = () => {
     const [getTitle,setTitle] = useState('');
 
     // initiate use navigate
-const navigate = useNavigate();
+    const navigate = useNavigate();
+
+    // config axios
+    const configAxios = {
+        headers: {
+            'Authorization': `Bearer ${document.cookie.split('=')[1]}`
+        }
+    }
 
     // create handle submit
     const handleSubmit = () => {
         if(getTitle === '') {
             // submit using axios post when no data inside input field
-            axios.post(`http://localhost:3000/api/todo`, { title: 'untitled' })
+            axios.post(`http://localhost:3000/api/todo`, { title: 'untitled' }, configAxios)
                 .then(res => console.log(res))
                 .catch(err => console.log(err)); 
 
@@ -22,7 +29,7 @@ const navigate = useNavigate();
             navigate('/todo')
         }else {
             // submit using axios post 
-            axios.post(`http://localhost:3000/api/todo`, { title: getTitle} )
+            axios.post(`http://localhost:3000/api/todo`, { title: getTitle}, configAxios)
                 .then(res => console.log(res))
                 .catch(err => console.log(err));
 

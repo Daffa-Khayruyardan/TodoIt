@@ -54,12 +54,14 @@ const Sidebar = () => {
             <LinkButton text="Add" to="/todo/add" icon={<IoIosAddCircle size={20} color={`${AddLink ? "white" : ""}`}/>} />
 
             {/* name container */}
-            <div className="xl:pl-2 pt-2 border-t-2 shadow-sm xl:absolute xl:w-full xl:h-16  bottom-0">
-                <h1 className="xl:sm">{currEmail}</h1>
-                <h1 className="xl:sm">{currUsername}</h1>
+            <div className="xl:pl-2 pt-2 xl:flex border-t-2 shadow-sm xl:absolute xl:w-full xl:h-16  bottom-0">
+                <div>
+                    <h1 className="xl:sm">{currEmail}</h1>
+                    <h1 className="xl:sm">{currUsername}</h1>
+                </div>
 
                 {/* logout button */}
-                <CiLogout className="cursor-pointer" onClick={() => logout()} />
+                <CiLogout size="22" className="cursor-pointer mt-[0.8em] ml-7" onClick={() => logout()} />
             </div>
         </aside>
     )

@@ -1,27 +1,25 @@
+// import packages
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const authJWT = (req,res,next) => {
     // get header payload
-    const headerAuth = req.headers["authorization"];
+    const {authorization} = req.headers;
 
-    if(headerAuth) {
-        // get token 
-        const getToken = headerAuth.split(' ')[1];
+    // if header blank
+    if(!authorization) return res.status(400).json({msg: "need token"});
 
-        // verify token
-        const verifiedToken = jwt.verify(getToken, process.env.SECRET_KEY);
+    // get token
+    const userToken = authorization.split(' ')[1];
 
-        // if token is not verified
-        if(!verifiedToken) {
-            res.status(404).json({msg: "Auth failed"});
-        }
+    // get secret key
+    const {SECRET_KEY} = process.env;
 
-        // got to protected routes 
-        next();
-        
-    }else {
-        res.status(404).json({msg: "No headers found"})
-    }
+    // verify jwt 
+    const verifyJWT = jwt.verify(userToken,SECRET_KEY);
+
+    // next to controller
+    next();
 }
 
 module.exports = {

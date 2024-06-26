@@ -10,8 +10,9 @@ const HomeLayout = () => {
     const currUsername = localStorage.getItem('currUsername')
 
     // check if cookies exist 
-    const isLogged = document.cookie.includes(`${currUsername}=`);
+    const isLogged = document.cookie.includes(`${currUsername}`);
 
+    console.log(document.cookie.split('=')[0]);
 
     return( isLogged ? 
         <div className="flex overflow-hidden h-full w-full">
