@@ -25,6 +25,8 @@ const Todo = () => {
     
     const {data} = useFetch("http://localhost:3000/api/todo");
 
+    console.log(data)
+
     return(
         <div className="xl:flex-1 bg-silverLight">
             {/* title container */}
