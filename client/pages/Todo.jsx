@@ -23,9 +23,10 @@ const Todo = () => {
     // create use navigate
     const navigate = useNavigate();
     
-    const {data} = useFetch("http://localhost:3000/api/todo");
+    // get currId
+    const currId = localStorage.getItem('currId');
 
-    console.log(data)
+    const {data} = useFetch(`http://localhost:3000/api/todo/${currId}`);
 
     return(
         <div className="xl:flex-1 bg-silverLight">
@@ -51,7 +52,7 @@ const Todo = () => {
                     return searchValue.toLocaleLowerCase() === '' ? item : item.title.toLowerCase().includes(searchValue);
                 }).map(item => (
                     // show item in card 
-                    <Card itemId={item._id} key={item._id} title={item.title} delData={() => useDelete(item._id,"http://localhost:3000/api/todo/")} editData={() => handleData()} />
+                    <Card itemId={item._id} key={item._id} title={item.title} delData={() => useDelete(`http://localhost:3000/api/todo/${currId}/${item._id}`)} editData={() => handleData()} />
                 ))}
             </div>
         </div>

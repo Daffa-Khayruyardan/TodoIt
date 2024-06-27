@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-const useDelete = (itemId,url) => {
+const useDelete = (url) => {
     // config axios
     const configAxios = {
         headers: {
@@ -10,7 +10,7 @@ const useDelete = (itemId,url) => {
     }
 
     // delete item
-    axios.delete(`${url}${itemId}`, configAxios);
+    axios.delete(`${url}`, configAxios);
 
     // reload pages after delete
     window.location.reload();

@@ -36,6 +36,7 @@ const Login = () => {
                     setErrorDisplay(false);
 
                     // set curr email and username
+                    localStorage.setItem('currId', `${res.data._id}`);
                     localStorage.setItem('currEmail', `${res.data.email}`);
                     localStorage.setItem('currUsername', `${res.data.username}`);
 

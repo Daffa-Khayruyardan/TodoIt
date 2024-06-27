@@ -3,13 +3,16 @@ const {authModel} = require("../model/auth_model");
 
 // index controller
 const showTodo = async (req,res) => {
+    // get params
+    const {userId} = req.params;
+
     // try and catch if there was error
     try{
         // find userdata
-        const indexTodoData = await authModel.find({}, 'userdata');
+        const indexTodoData = await authModel.findById(userId);
 
         // maping array
-        const userdata = indexTodoData.map(item => item.userdata).flat();
+        const userdata = indexTodoData.userdata;
 
         res.status(200).json(userdata);
     }catch (err) {
@@ -44,7 +47,7 @@ const postTodo = async (req,res) => {
     // catch if there was an error
     try{
         // find user
-        const username = await authModel.findOne({username: 'daffakhayru'});
+        const username = await authModel.findOne({username: 'diffakhayru'});
 
         // push to subdocuments
         await username.userdata.push({
@@ -63,17 +66,26 @@ const postTodo = async (req,res) => {
 // put todo controller
 const putTodo = async (req,res) => {
     // get params
-    const {id} = req.params;
+    const {userId, userDataId} = req.params;
 
     // get query
     const {title} = req.body;
 
     try{
-        // response after update data
-        const putTodoData = await todoModel.findByIdAndUpdate(id, {title}, {new:true});
+        // get user by id
+        const getUser = await authModel.findById(userId);
+
+        // find user data by id
+        const getUserData = await getUser.userdata.id(userDataId);
+
+        // update body request
+        getUserData.title = title;
+
+        // save update
+        await getUser.save();
 
         // update existing data
-        res.status(200).json(putTodoData);
+        res.status(200).json({msg: 'update success'});
     }catch (err) {
         res.status(404).json({message: err});
     }
