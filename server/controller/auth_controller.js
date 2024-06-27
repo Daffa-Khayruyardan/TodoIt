@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 // import model
-const authModel = require("../model/auth_model");
+const {authModel} = require("../model/auth_model");
 
 // register controller
 const signup = async (req,res) => { 

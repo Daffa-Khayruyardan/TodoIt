@@ -1,13 +1,17 @@
 // import model
-const todoModel = require("../model/todo_model");
+const {authModel} = require("../model/auth_model");
 
 // index controller
 const showTodo = async (req,res) => {
     // try and catch if there was error
     try{
-        const indexTodoData = await todoModel.find();
+        // find userdata
+        const indexTodoData = await authModel.find({}, 'userdata');
 
-        res.status(200).json(indexTodoData);
+        // maping array
+        const userdata = indexTodoData.map(item => item.userdata).flat();
+
+        res.status(200).json(userdata);
     }catch (err) {
         res.status(404).json({message: err});
     }
@@ -16,13 +20,17 @@ const showTodo = async (req,res) => {
 // find one todo controller
 const indexTodo = async (req,res) => {
     // get params
-    const {id} = req.params;
+    const {userId, userDataId} = req.params;
 
     // try catch
     try{
-        const findTodoData = await todoModel.findById(id);
+        // find user by id
+        const findTodoData = await authModel.findById(userId);
+
+        // find userdata by id
+        const userData = findTodoData.userdata.find(item => item._id.equals(userDataId))
         
-        res.status(200).json(findTodoData);
+        res.status(200).json(userData);
     }catch(err) {
         res.status(404).json({message: err})
     }
@@ -33,16 +41,20 @@ const postTodo = async (req,res) => {
     // get request body
     const { title } = req.body;
 
-    // insert new value
-    const newTodo = todoModel({
-        title: title 
-    });
-
     // catch if there was an error
     try{
-        const postTodoData = await newTodo.save();
+        // find user
+        const username = await authModel.findOne({username: 'daffakhayru'});
 
-        res.status(200).json(postTodoData);
+        // push to subdocuments
+        await username.userdata.push({
+            title: title
+        }) 
+
+        // save userdata
+        const postUserdata = await username.save();
+
+        res.status(200).json(postUserdata);
     }catch (err) {
         res.status(404).json({message: err});
     }
@@ -70,14 +82,18 @@ const putTodo = async (req,res) => {
 // delete todo controller
 const delTodo = async (req,res) => {
     // get items 
-    const {id} = req.params;
+    const {userId,userDataId} = req.params;
 
     try{
         // delete data from params
-        const delTodoData = await todoModel.findByIdAndDelete(id);
+        const delTodoData = await authModel.findByIdAndUpdate(
+            userId,
+            {$pull: {userdata: { _id: userDataId}}},
+            { new: true }
+        );
 
         // response after completed delete data
-        res.status(200).json(delTodoData);
+        res.status(200).json({delTodoData});
     }catch (err) {
         // response failed delete data 
         res.status(404).json({message: err});
