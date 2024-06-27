@@ -25,10 +25,14 @@ const Sidebar = () => {
 
     // handle logout
     const logout = () => {
+        // get current username
+        const currUsername = localStorage.getItem('currUsername');
+
         // set cookies to expire
-        document.cookie = "daffakhayru" + "=; Max-Age=-99999999;";
+        document.cookie = `${currUsername}` + "=; Max-Age=-99999999;";
 
         // remove user info
+        localStorage.removeItem('currId')
         localStorage.removeItem('currEmail');
         localStorage.removeItem('currUsername');
 

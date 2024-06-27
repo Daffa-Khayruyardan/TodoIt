@@ -16,8 +16,11 @@ const AddTodo = () => {
     // initiate use navigate
     const navigate = useNavigate();
 
+    // get userId 
+    const userId = localStorage.getItem('currId');
+
     useEffect(() => {
-        axios.get(`http://localhost:3000/api/todo/${id}`)
+        axios.get(`http://localhost:3000/api/todo/${userId}/${id}`)
             .then(res => setContentData(res.data.title))
             .catch(err => console.log(err));
     }, [])
@@ -27,7 +30,7 @@ const AddTodo = () => {
 
     // handle submit changes 
     const handleSubmitChanges = () => {
-        axios.put(`http://localhost:3000/api/todo/${id}`, {title: modifyTitle})
+        axios.put(`http://localhost:3000/api/todo/${userId}/${id}`, {title: modifyTitle})
             .then(res => console.log(succesfully))
             .catch(err => console.log("error")); 
 

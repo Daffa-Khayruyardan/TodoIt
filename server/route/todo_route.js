@@ -15,7 +15,7 @@ router.get('/todo/:userId',showTodo);
 router.get('/todo/:userId/:userDataId',indexTodo)
 
 // post todo
-router.post('/todo',postTodo);
+router.post('/todo/:user',postTodo);
 
 // put todo
 router.put('/todo/:userId/:userDataId',putTodo);
