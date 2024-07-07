@@ -9,19 +9,19 @@ const {authJWT} = require("../middleware/auth_middleware");
 const {showTodo, indexTodo, postTodo, putTodo, delTodo} = require("../controller/todo_controller");
 
 // get todo index 
-router.get('/todo/:userId',showTodo);
+router.get('/todo/:userId',authJWT,showTodo);
 
 // find one todo
-router.get('/todo/:userId/:userDataId',indexTodo)
+router.get('/todo/:userId/:userDataId',authJWT,indexTodo)
 
 // post todo
-router.post('/todo/:user',postTodo);
+router.post('/todo/:user',authJWT,postTodo);
 
 // put todo
-router.put('/todo/:userId/:userDataId',putTodo);
+router.put('/todo/:userId/:userDataId',authJWT,putTodo);
 
 // del todo
-router.delete('/todo/:userId/:userDataId',delTodo);
+router.delete('/todo/:userId/:userDataId',authJWT,delTodo);
 
 
 module.exports = router;
