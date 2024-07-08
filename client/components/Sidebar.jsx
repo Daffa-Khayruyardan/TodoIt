@@ -41,7 +41,7 @@ const Sidebar = () => {
     };
 
     return(
-        <aside className="relative h-[100vh] shadow-md w-[20vw]">
+        <aside className=" h-[100vh] fixed shadow-md w-[20vw]">
             {/* app logo and title container */}
             <div className="xl:flex xl:mt-[1em] xl:items-center xl:ml-[1.4em] xl:mb-[1.6em]">
                 {/* logo */}

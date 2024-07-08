@@ -13,7 +13,7 @@ const HomeLayout = () => {
     const isLogged = document.cookie.includes(`${currUsername}`);
 
     return( isLogged ? 
-        <div className="flex overflow-hidden h-full w-full">
+        <div className="xl:flex">
             {/* sidebar menu */}
             <Sidebar />
 

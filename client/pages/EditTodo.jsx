@@ -44,7 +44,7 @@ const AddTodo = () => {
     }
 
     return(
-        <div className="xl:flex xl:justify-center xl:items-center xl:bg-silverLight xl:flex-1">
+        <div className="xl:flex absolute xl:top-[10em] right-[20em] xl:bg-silverLight xl:flex-1">
             {/* form container */}
             <form action="" className="xl:shadow-md xl:bg-white xl:w-96 xl:h-64">
                 {/* form title */}

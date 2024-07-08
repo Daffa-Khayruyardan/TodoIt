@@ -29,7 +29,7 @@ const Todo = () => {
     const {data} = useFetch(`http://localhost:3000/api/todo/${currId}`);
 
     return(
-        <div className="xl:flex-1 bg-silverLight">
+        <div className="xl:flex-1 xl:ml-[17em] bg-silverLight">
             {/* title container */}
             <div className="xl:h-10 xl:flex xl:justify-between xl:items-center xl:pb-[0.8em] xl:pr-[4em]">
                 {/* title of pages */}
