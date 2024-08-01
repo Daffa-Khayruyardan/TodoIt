@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:18-alpine
 
 WORKDIR /todoit-server 
 
@@ -7,8 +7,6 @@ COPY package*.json ./
 RUN npm install 
 
 COPY . . 
-
-ENV PORT=3000
 
 EXPOSE 3000
 

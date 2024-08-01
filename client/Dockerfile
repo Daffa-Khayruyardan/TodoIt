@@ -1,13 +1,17 @@
 FROM node:18-alpine
 
-WORKDIR /app
+WORKDIR /todoit-client
 
-COPY package*.json .
+COPY package*.json ./
 
 RUN npm install
 
 COPY . .
 
-EXPOSE 5173
+RUN npm run build 
 
-CMD [ "npm", "run", "dev", "--", "--host" ]
+RUN npm install -g serve
+
+EXPOSE 5000
+
+CMD ["serve", "-s", "dist", "-l", "5000"]

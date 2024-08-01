@@ -27,12 +27,6 @@ app.use(cookieParser());
 app.use("/api", todoRoute);
 app.use('/api', authRoute);
 
-app.get('/', (req,res) => {
-    const headerAuth = req.headers["authorization"];
-
-    res.send('jelek');
-});
-
 // run server at port 3000
 app.listen(process.env.PORT, () => {
     console.log(`server running at port 3000`)
