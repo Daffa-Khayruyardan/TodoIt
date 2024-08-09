@@ -1,6 +1,5 @@
 // import packages 
 import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 // import components 
 import LinkButton from "./LinkButton";

@@ -27,6 +27,10 @@ app.use(cookieParser());
 app.use("/api", todoRoute);
 app.use('/api', authRoute);
 
+app.get('/coba', (req,res) => {
+    res.send("Hello Bisa");
+});
+
 // run server at port 3000
 app.listen(process.env.PORT, () => {
     console.log(`server running at port 3000`)

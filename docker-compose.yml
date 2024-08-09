@@ -1,0 +1,19 @@
+version: "4"
+services: 
+  web:
+    build: ./client
+    ports: 
+      - 5000:5000 
+
+  api:
+    build: ./server
+    ports: 
+      - 3000:3000
+    environment:
+      - DB_URL=mongodb://mongodb:27017/todoit
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    

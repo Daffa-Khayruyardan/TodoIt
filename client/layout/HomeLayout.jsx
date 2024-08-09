@@ -1,6 +1,5 @@
 // import packages 
 import { Outlet, Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 // import components 
 import Sidebar from "../components/Sidebar";
