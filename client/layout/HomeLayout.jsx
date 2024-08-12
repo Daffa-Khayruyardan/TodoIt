@@ -10,7 +10,9 @@ const HomeLayout = () => {
     const currUsername = localStorage.getItem('currUsername')
 
     // check if cookies exist 
-    const isLogged = document.cookie.includes(`${currUsername}`);
+    // const isLogged = document.cookie.includes(`${currUsername}`);
+
+    const isLogged = true;
 
     return( isLogged ? 
         <div className="xl:flex">

@@ -52,6 +52,8 @@ const postTodo = async (req,res) => {
         // find user
         const username = await authModel.findOne({username: user});
 
+        console.log(username);
+
         // push to subdocuments
         await username.userdata.push({
             title: title

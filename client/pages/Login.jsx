@@ -2,16 +2,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from 'axios';
-import Cookies from 'js-cookie';
-import { useDispatch } from "react-redux";
 
 // import reacts icons
 import { LuListTodo } from "react-icons/lu";
 
 const Login = () => {
-    // initialize dispatch
-    const dispatch = useDispatch();
-
     // initialize navigate
     const navigate = useNavigate();
 
