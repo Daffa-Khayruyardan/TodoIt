@@ -1,6 +1,6 @@
 // import packages
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 // import components
@@ -55,6 +55,8 @@ const Todo = () => {
                     <Card itemId={item._id} key={item._id} title={item.title} delData={() => useDelete(`http://localhost:3000/api/todo/${currId}/${item._id}`)} editData={() => handleData()} />
                 ))}
             </div>
+
+            <Outlet />
         </div>
     )
 }

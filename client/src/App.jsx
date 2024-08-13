@@ -11,6 +11,7 @@ import Register from "../pages/Register";
 import Todo from "../pages/Todo";
 import EditTodo from "../pages/EditTodo";
 import AddTodo from "../pages/AddTodo";
+import Setting from "../pages/Setting";
 
 const App = () => {
   return(
@@ -23,9 +24,15 @@ const App = () => {
 
       {/* homepage layout */}
       <Route path="/" element={<HomeLayout />}>
-        <Route path="todo" element={<Todo />} />
+        {/* todo */}
+        <Route path="todo" element={<Todo />}>
+          <Route path="setting" element={<Setting />} />
+        <Route/>
+
         <Route path="todo/add" element={<AddTodo />} />
         <Route path="todo/edit/:id" element={<EditTodo />} />
+      </Route>
+      
       </Route>
     </Routes>
   )

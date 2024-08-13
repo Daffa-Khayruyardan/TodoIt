@@ -18,6 +18,7 @@ const Sidebar = () => {
     // condition active link
     const InboxLink = pathname === "/todo";
     const AddLink = pathname === "/todo/add";
+    const SettingLink = pathname === "/todo/setting";
 
     // current username and email
     const currEmail = localStorage.getItem('currEmail');
@@ -56,6 +57,9 @@ const Sidebar = () => {
 
             {/* add link */}
             <LinkButton text="Add" to="/todo/add" icon={<IoIosAddCircle size={20} color={`${AddLink ? "white" : ""}`}/>} />
+
+            {/* Setting link */}
+            <LinkButton text="Setting" to="/todo/setting" icon={<IoIosAddCircle size={20} color={`${SettingLink ? "white" : ""}`}/>} />
 
             {/* name container */}
             <div className="xl:pl-2 pt-2 xl:flex border-t-2 shadow-sm xl:absolute xl:w-full xl:h-16  bottom-0">
