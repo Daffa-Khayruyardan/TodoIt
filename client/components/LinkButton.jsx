@@ -8,7 +8,7 @@ const LinkButton = ({text,to,icon}) => {
 
     return(
         // button link container
-        <Link to={to} className={`xl:flex xl:items-center xl:border-l-[5px] xl: xl:pt-[0.4em] xl:pb-[0.4em] xl:ml-[0.4em] xl:mr-[0.6em] xl:rounded-lg xl:border-white ${pathname == to ? "xl:bg-greenLight" : ""} xl:mt-[0.5em] xl:pl-[1.5em]`}>
+        <Link to={to} className={`xl:duration-300 xl:flex xl:items-center xl:border-l-[5px] xl: xl:pt-[0.4em] xl:pb-[0.4em] xl:ml-[0.4em] xl:mr-[0.6em] xl:rounded-lg xl:border-white ${pathname == to ? "xl:bg-greenLight" : ""} xl:mt-[0.5em] xl:pl-[1.5em]`}>
             {/* place link button icon here */}
             {icon}
 
