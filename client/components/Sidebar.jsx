@@ -33,16 +33,11 @@ const Sidebar = () => {
     // handle logout
     const logout = async () => {
         // set cookies to expire
-        // document.cookie = `${userInfo.username}` + "=; Max-Age=-99999999;";
+        document.cookie = `${userInfo._id}` + "=; Max-Age=-99999999;";
 
         // remove user info
-        // localStorage.removeItem('currId')
+        localStorage.removeItem('currId')
 
-        const currId = localStorage.getItem('currId');
-
-        const result = await axios.post(`http://localhost:3000/api/logout/${currId}`)
-
-        console.log(result);
         // reload page
         window.location.reload();
     };
@@ -76,7 +71,9 @@ const Sidebar = () => {
             </div>
 
             {/* todo link */}
-            <LinkButton text="Inbox" to="/todo" icon={<FaInbox size={20} color={`${InboxLink ? "white" : ""}`} />} />
+            <LinkButton amount={
+                <div className={`xl:ml-24 ${InboxLink ? "text-white": ""}`}>{userInfo && userInfo.userdata.length}</div>
+            } text="Inbox" to="/todo" icon={<FaInbox size={20} color={`${InboxLink ? "white" : ""}`} />} />
 
             {/* add link */}
             <LinkButton text="Add" to="/todo/add" icon={<IoIosAddCircle size={20} color={`${AddLink ? "white" : ""}`}/>} />

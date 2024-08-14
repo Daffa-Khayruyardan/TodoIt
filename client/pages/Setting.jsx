@@ -42,7 +42,11 @@ const Setting = () => {
         await axios.put(`http://localhost:3000/api/user/${currId}`, { username: username})
 
         alert("update successfull");
-    }
+
+        window.location.reload();
+    };
+
+    console.log(userInfo.username);
 
     return (
         <div className='xl:flex xl:justify-center xl:items-center xl:bg-transparent w-full h-screen absolute top-0 left-0'>

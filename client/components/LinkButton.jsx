@@ -2,7 +2,7 @@
 import { Link, useLocation } from "react-router-dom";
 
 // create link button to go another pages
-const LinkButton = ({text,to,icon}) => {
+const LinkButton = ({text,to,icon,amount}) => {
     // get current path location
     const {pathname} = useLocation();
 
@@ -14,6 +14,9 @@ const LinkButton = ({text,to,icon}) => {
 
             {/* text icon */}
             <h1 className={`xl:ml-[1.3em] xl:text-md ${pathname === to ? "xl:text-white" : ""}`}>{text}</h1>
+
+            {/* amount */}
+            {amount}
         </Link>
     )
 }
