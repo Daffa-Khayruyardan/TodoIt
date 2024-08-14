@@ -20,11 +20,11 @@ const AddTodo = () => {
     // create handle submit
     const handleSubmit = () => {
         // get current username
-        const currUsername = localStorage.getItem('currUsername');
+        const currId = localStorage.getItem('currId');
 
         if(getTitle === '') {
             // submit using axios post when no data inside input field
-            axios.post(`http://localhost:3000/api/todo/${currUsername}`, { title: 'untitled' }, configAxios)
+            axios.post(`http://localhost:3000/api/todo/${currId}`, { title: 'untitled' }, configAxios)
                 .then(res => console.log(res))
                 .catch(err => console.log(err)); 
 
@@ -32,7 +32,7 @@ const AddTodo = () => {
             navigate('/todo')
         }else {
             // submit using axios post 
-            axios.post(`http://localhost:3000/api/todo/${currUsername}`, { title: getTitle}, configAxios)
+            axios.post(`http://localhost:3000/api/todo/${currId}`, { title: getTitle}, configAxios)
                 .then(res => console.log(res))
                 .catch(err => console.log(err));
 

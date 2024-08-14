@@ -7,12 +7,11 @@ import Sidebar from "../components/Sidebar";
 
 
 const HomeLayout = () => {
-    const currUsername = localStorage.getItem('currUsername')
+    // get current id 
+    const currId = localStorage.getItem('currId')
 
     // check if cookies exist 
-    const isLogged = document.cookie.includes(`${currUsername}`);
-
-    // const isLogged = true;
+    const isLogged = document.cookie.includes(`${currId}`);
 
     return( isLogged ? 
         <div className="xl:flex">

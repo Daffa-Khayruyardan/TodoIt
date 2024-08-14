@@ -1,6 +1,8 @@
 // import packages 
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useState,useEffect } from "react";
+import axios from 'axios';
 
 // import components 
 import LinkButton from "./LinkButton";
@@ -13,6 +15,9 @@ import { CiLogout } from "react-icons/ci";
 import { IoMdSettings } from "react-icons/io";
 
 const Sidebar = () => {
+    // store fetch items
+    const [userInfo,setUserInfo] = useState('');
+
     // get url location
     const {pathname} = useLocation();
 
@@ -26,23 +31,38 @@ const Sidebar = () => {
     const currUsername = localStorage.getItem('currUsername');
 
     // handle logout
-    const logout = () => {
-        // get current username
-        const currUsername = localStorage.getItem('currUsername');
-
+    const logout = async () => {
         // set cookies to expire
-        document.cookie = `${currUsername}` + "=; Max-Age=-99999999;";
+        // document.cookie = `${userInfo.username}` + "=; Max-Age=-99999999;";
 
         // remove user info
-        localStorage.removeItem('currId')
-        localStorage.removeItem('currEmail');
-        localStorage.removeItem('currUsername');
+        // localStorage.removeItem('currId')
 
+        const currId = localStorage.getItem('currId');
+
+        const result = await axios.post(`http://localhost:3000/api/logout/${currId}`)
+
+        console.log(result);
         // reload page
         window.location.reload();
     };
 
-    
+    // get curr user id
+    const currId = localStorage.getItem("currId");
+
+    // fetching user inforamtion
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            try{
+                const userInfo = await axios.get(`http://localhost:3000/api/user/${currId}`)
+                setUserInfo(userInfo.data);
+            }catch(err) {
+                console.log(err);
+            }
+        }
+
+        fetchUserInfo();
+    }, []);
 
     return(
         <aside className=" h-[100vh] fixed shadow-md w-[20vw]">
@@ -67,8 +87,8 @@ const Sidebar = () => {
             {/* name container */}
             <div className="xl:pl-2 pt-2 xl:flex border-t-2 shadow-sm xl:absolute xl:w-full xl:h-16  bottom-0">
                 <div>
-                    <h1 className="xl:sm">{currEmail}</h1>
-                    <h1 className="xl:sm">{currUsername}</h1>
+                    <h1 className="xl:sm">{userInfo.email}</h1>
+                    <h1 className="xl:sm">{userInfo.username}</h1>
                 </div>
 
                 {/* logout button */}

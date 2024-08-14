@@ -75,7 +75,7 @@ const login = async (req,res) => {
         const jwtToken = await jwt.sign({user}, SECRET_KEY, { expiresIn: '1h' });
 
         // set to cookie
-        res.cookie(user.username, jwtToken, { httpOnly: false });
+        res.cookie(user._id, jwtToken, { httpOnly: false });
 
         // respond
         res.status(200).json(user);
@@ -85,7 +85,21 @@ const login = async (req,res) => {
     }
 }
 
+// logout controller
+const logout = async (req,res) => {
+    // get id from parameter
+    const {id} = req.params;
+
+    console.log(id);
+
+    // clear current cookie
+    res.clearCookie(`${id}`, { httpOnly: true });
+
+    res.status(200).send("User has been log out");
+}
+
 module.exports = {
     signup,
-    login 
+    login,
+    logout
 }

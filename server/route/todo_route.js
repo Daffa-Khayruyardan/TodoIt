@@ -15,7 +15,7 @@ router.get('/todo/:userId',authJWT,showTodo);
 router.get('/todo/:userId/:userDataId',authJWT,indexTodo)
 
 // post todo
-router.post('/todo/:user',authJWT,postTodo);
+router.post('/todo/:userId',authJWT,postTodo);
 
 // put todo
 router.put('/todo/:userId/:userDataId',authJWT,putTodo);
