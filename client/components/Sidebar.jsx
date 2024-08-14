@@ -10,6 +10,7 @@ import { LuListTodo } from "react-icons/lu";
 import { IoIosAddCircle } from "react-icons/io";
 import { FaInbox } from "react-icons/fa6";
 import { CiLogout } from "react-icons/ci";
+import { IoMdSettings } from "react-icons/io";
 
 const Sidebar = () => {
     // get url location
@@ -41,6 +42,8 @@ const Sidebar = () => {
         window.location.reload();
     };
 
+    
+
     return(
         <aside className=" h-[100vh] fixed shadow-md w-[20vw]">
             {/* app logo and title container */}
@@ -59,7 +62,7 @@ const Sidebar = () => {
             <LinkButton text="Add" to="/todo/add" icon={<IoIosAddCircle size={20} color={`${AddLink ? "white" : ""}`}/>} />
 
             {/* Setting link */}
-            <LinkButton text="Setting" to="/todo/setting" icon={<IoIosAddCircle size={20} color={`${SettingLink ? "white" : ""}`}/>} />
+            <LinkButton text="Setting" to="/todo/setting" icon={<IoMdSettings size={20} color={`${SettingLink ? "white" : ""}`}/>} />
 
             {/* name container */}
             <div className="xl:pl-2 pt-2 xl:flex border-t-2 shadow-sm xl:absolute xl:w-full xl:h-16  bottom-0">

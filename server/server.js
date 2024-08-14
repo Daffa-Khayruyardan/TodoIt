@@ -10,6 +10,7 @@ require("dotenv").config();
 // import route
 const todoRoute = require("./route/todo_route");
 const authRoute = require("./route/auth_route");
+const userRoute = require("./route/user_route");
 
 // define app
 const app = express();
@@ -26,6 +27,7 @@ app.use(cookieParser());
 // import user routes
 app.use("/api", todoRoute);
 app.use('/api', authRoute);
+app.use('/api', userRoute);
 
 app.get('/', (req,res) => {
     const headerAuth = req.headers["authorization"];

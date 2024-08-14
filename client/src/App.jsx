@@ -27,12 +27,9 @@ const App = () => {
         {/* todo */}
         <Route path="todo" element={<Todo />}>
           <Route path="setting" element={<Setting />} />
-        <Route/>
-
+        </Route>
         <Route path="todo/add" element={<AddTodo />} />
         <Route path="todo/edit/:id" element={<EditTodo />} />
-      </Route>
-      
       </Route>
     </Routes>
   )
