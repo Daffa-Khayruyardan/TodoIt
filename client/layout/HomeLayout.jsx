@@ -11,10 +11,12 @@ const HomeLayout = () => {
     const currId = localStorage.getItem('currId')
 
     // check if cookies exist 
-    const isLogged = document.cookie.includes(`${currId}`);
+    // const isLogged = document.cookie.includes(`${currId}`);
+
+    const isLogged = true;
 
     return( isLogged ? 
-        <div className="xl:flex">
+        <div className="flex max-sm:overflow-x-hidden max-sm:overflow-y-hidden">
             {/* sidebar menu */}
             <Sidebar />
 

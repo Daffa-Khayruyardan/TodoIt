@@ -61,7 +61,7 @@ const Register = () => {
     }   
 
     return(
-        <div className="flex flex-col flex-1 fixed right-[10em] lg:right-[6.4em] items-center">
+        <div className="flex flex-col flex-1 max-sm:right-[2em] fixed right-[10em] lg:right-[6.4em] items-center">
             {/* app icons */}
             <LuListTodo size={60} color="#59e3b9" className="mt-[3.2em]" />
 

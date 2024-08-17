@@ -12,6 +12,10 @@ import { IoIosAddCircle } from "react-icons/io";
 import { FaInbox } from "react-icons/fa6";
 import { CiLogout } from "react-icons/ci";
 import { IoMdSettings } from "react-icons/io";
+import { CiMenuBurger } from "react-icons/ci";
+
+// import store from 
+import { useStore } from '../store/sidebarStore';
 
 const Sidebar = () => {
     // store fetch items
@@ -58,8 +62,11 @@ const Sidebar = () => {
         fetchUserInfo();
     }, []);
 
+    const isShow = useStore(state => state.isShow);
+    const toggleShow = useStore(state => state.toggleShow);
+
     return(
-        <aside className={`h-[100vh] fixed shadow-md xl:w-[19.1vw] lg:w-[24vw]`}>
+        <aside className={`h-[100vh] max-sm:duration-200 fixed shadow-md ${isShow ? "" : "max-sm:translate-x-[-100%]"} max-sm:absolute max-sm:z-20 max-sm:overflow-hidden xl:w-[19.1vw] lg:w-[24vw]`}>
             {/* app logo and title container */}
             <div className="flex mt-[1em] items-center ml-[1.4em] mb-[1.6em]">
                 {/* logo */}
@@ -67,6 +74,8 @@ const Sidebar = () => {
 
                 {/* title */}
                 <h1 className="text-[1.4em]">TodoIt</h1>
+
+                <CiMenuBurger onClick={toggleShow} className="max-sm:ml-10" />
             </div>
 
             {/* todo link */}

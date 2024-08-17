@@ -13,12 +13,12 @@ const Card = ({title,delData,editData,itemId}) => {
     }, []);
 
     return (
-        <div className="flex cursor-pointer shadow-md justify-between items-center bg-white mt-[1.5em] mr-[4em] ml-[2em] pl-[2em] pt-[1.2em] pb-[1.2em]">
+        <div className="flex max-sm:mt-[2em] cursor-pointer shadow-md justify-between items-center bg-white mt-[1.5em] max-sm:mr-[1em] mr-[4em] max-sm:ml-[1em] ml-[2em] pl-[2em] pt-[1.2em] pb-[1.2em]">
             {/* name of todo */}
             <h1>{title}</h1>
 
             {/* container modify */}
-            <div className="flex pr-10 justify-between items-cente w-40 h-full">
+            <div className="flex pr-10 justify-between items-center w-40 h-full">
                 {/* container modify */}
                 <Link to={`/todo/edit/${itemId}`} onClick={editData} className="flex justify-center rounded-full px-2 py-2 items-center cursor-pointer hover:bg-greenLightDying mr-[2em] w-10 h-9">
                     {/* edit  */}

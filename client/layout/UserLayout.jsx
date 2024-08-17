@@ -8,7 +8,7 @@ const UserLayout = () => {
     const isLogged = document.cookie.includes('daffakhayru=');
 
     return(isLogged ? <Navigate to="/todo" /> :
-        <div className="xl:flex overflow-hidden">
+        <div className="flex overflow-hidden">
             <SideUser />
             <Outlet />
         </div>

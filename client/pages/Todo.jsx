@@ -8,10 +8,14 @@ import Card from "../components/Card";
 
 // import icons
 import { FaSearch } from "react-icons/fa";
+import { CiMenuBurger } from "react-icons/ci";
 
 // import custom hooks
 import useFetch from "../hooks/useFetch";
 import useDelete from "../hooks/useDelete";
+
+// import store from 
+import { useStore } from '../store/sidebarStore';
 
 const Todo = () => {
     // add todo visible condition
@@ -28,10 +32,19 @@ const Todo = () => {
 
     const {data} = useFetch(`http://localhost:3000/api/todo/${currId}`);
 
+    // get hamburger menu state 
+    const toggleShow = useStore(state => state.toggleShow);
+    const isShow = useStore(state => state.isShow);
+
     return(
-        <div className="flex-1 lg:ml-[15.6em] ml-[20em] bg-silverLight">
+        <div className={`flex-1 max-sm:ml-[0em] ${isShow ? "max-sm:hidden" : ""} max-sm:absolute max-sm:-z-10 ml-[15.5em] bg-silverLight`}>
             {/* title container */}
-            <div className="h-10 flex justify-between items-center pb-[0.8em] pr-[4em]">
+            <div className="h-10 flex justify-between max-sm:items-center items-center pb-[0.8em] pr-[4em]">
+                {/* menuburger */}
+                <div className="max-sm:rounded-full max-sm:hover:bg-silverLight">
+                    <CiMenuBurger onClick={toggleShow} className="cursor-pointer xl:hidden max-sm:ml-2" />
+                </div>
+
                 {/* title of pages */}
                 <h1 className="ml-[2em] font-bold pt-[1em] text-">Inbox</h1>
 

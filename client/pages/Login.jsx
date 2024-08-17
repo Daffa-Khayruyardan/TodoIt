@@ -71,7 +71,7 @@ const Login = () => {
     }
 
     return(
-        <div className="flex flex-col fixed xl:right-[10em] lg:right-[6.4em] md:right-[5em] max-sm:right-[10em] xl:mt-[0em] lg:mt-[2em]  flex-1 items-center">
+        <div className="flex flex-col fixed max-sm:right-[2em] right-[10em]  flex-1 items-center">
             {/* app icons */}
             <LuListTodo size={60} color="#59e3b9" className="mt-[3.2em]" />
 
@@ -89,10 +89,10 @@ const Login = () => {
             {/* create login form */}
             <form onSubmit={(e) => handleSubmit(e)} className="mt-[1.5em] flex flex-col ">
                 {/* input email */}
-                <input onChange={(e) => setEmail(e.target.value)} className="border focus:outline-greenLight bg-greenLightDying p-1 mt-[0.7em] pl-[0.8em] rounded-sm lg:w-[17em] xl:w-[20em] h-[2.4em]" placeholder="Email" name="email" type="text"/>
+                <input onChange={(e) => setEmail(e.target.value)} className="border focus:outline-greenLight bg-greenLightDying p-1 mt-[0.7em] pl-[0.8em] rounded-sm w-[20em] h-[2.4em]" placeholder="Email" name="email" type="text"/>
                 
                 {/* input password */}
-                <input onChange={(e) => setPassword(e.target.value)} className="border focus:outline-greenLight bg-greenLightDying p-1 mt-[0.7em] pl-[0.8em] rounded-sm lg:w-[17em] xl:w-[20em] h-[2.4em]" placeholder="Password" name="password" type="text"/>
+                <input onChange={(e) => setPassword(e.target.value)} className="border focus:outline-greenLight bg-greenLightDying p-1 mt-[0.7em] pl-[0.8em] rounded-sm w-[20em] h-[2.4em]" placeholder="Password" name="password" type="text"/>
 
                 {/* login button */}
                 <button className="mt-[1.4em] h-[2.2em] hover:bg-greenLightHover duration-200 bg-greenLight rounded-sm text-white cursor-pointer" type="submit">Submit</button>
