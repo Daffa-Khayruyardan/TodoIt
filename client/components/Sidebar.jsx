@@ -1,6 +1,5 @@
 // import packages 
 import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useState,useEffect } from "react";
 import axios from 'axios';
 
@@ -60,19 +59,19 @@ const Sidebar = () => {
     }, []);
 
     return(
-        <aside className=" h-[100vh] fixed shadow-md w-[20vw]">
+        <aside className={`h-[100vh] fixed shadow-md xl:w-[19.1vw] lg:w-[24vw]`}>
             {/* app logo and title container */}
-            <div className="xl:flex xl:mt-[1em] xl:items-center xl:ml-[1.4em] xl:mb-[1.6em]">
+            <div className="flex mt-[1em] items-center ml-[1.4em] mb-[1.6em]">
                 {/* logo */}
-                <LuListTodo size={30} color="" className="xl:mr-[0.8em]" />
+                <LuListTodo size={30} color="" className="mr-[0.8em]" />
 
                 {/* title */}
-                <h1 className="xl:text-[1.4em]">TodoIt</h1>
+                <h1 className="text-[1.4em]">TodoIt</h1>
             </div>
 
             {/* todo link */}
             <LinkButton amount={
-                <div className={`xl:ml-24 ${InboxLink ? "text-white": ""}`}>{userInfo && userInfo.userdata.length}</div>
+                <div className={`ml-24 ${InboxLink ? "text-white": ""}`}>{userInfo && userInfo.userdata.length}</div>
             } text="Inbox" to="/todo" icon={<FaInbox size={20} color={`${InboxLink ? "white" : ""}`} />} />
 
             {/* add link */}
@@ -82,10 +81,10 @@ const Sidebar = () => {
             <LinkButton text="Setting" to="/todo/setting" icon={<IoMdSettings size={20} color={`${SettingLink ? "white" : ""}`}/>} />
 
             {/* name container */}
-            <div className="xl:pl-2 pt-2 xl:flex border-t-2 shadow-sm xl:absolute xl:w-full xl:h-16  bottom-0">
+            <div className="pl-2 pt-2 flex border-t-2 shadow-sm absolute w-full h-16  bottom-0">
                 <div>
-                    <h1 className="xl:sm">{userInfo.email}</h1>
-                    <h1 className="xl:sm">{userInfo.username}</h1>
+                    <h1 className="sm">{userInfo.email}</h1>
+                    <h1 className="sm">{userInfo.username}</h1>
                 </div>
 
                 {/* logout button */}

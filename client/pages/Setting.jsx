@@ -46,29 +46,27 @@ const Setting = () => {
         window.location.reload();
     };
 
-    console.log(userInfo.username);
-
     return (
-        <div className='xl:flex xl:justify-center xl:items-center xl:bg-transparent w-full h-screen absolute top-0 left-0'>
+        <div className='flex justify-center items-center bg-transparent w-full h-screen absolute top-0 left-0'>
             {/* modal popup */}
-            <div className='xl:px-5 xl:pt-4 xl:bg-white xl:w-[54%] h-[74%]'>
+            <div className='px-5 pt-4 bg-white w-[54%] h-[74%]'>
                 {/* header container */}
-                <div className='xl:flex xl:items-center xl:justify-between'>
-                    <h1 className='xl:text-xl xl:font-semibold'>User Information</h1>
-                    <IoClose onClick={goToHomepage} size={22} className='xl:cursor-pointer' />
+                <div className='flex items-center justify-between'>
+                    <h1 className='text-xl font-semibold'>User Information</h1>
+                    <IoClose onClick={goToHomepage} size={22} className='cursor-pointer' />
                 </div>
 
                 {/* form update user */}
                 <form onSubmit={handleUpdateUsername}>
                     {/* email input */}
                     <label>Email: </label><br/>
-                    <input defaultValue={userInfo.email} disabled type="text" className='xl:w-72 xl:border xl:py-1 xl:pl-4 xl:focus:outline-greenLight xl:bg-greenLightDying' /><br/>
+                    <input defaultValue={userInfo.email} disabled type="text" className='w-72 lg:w-64 border py-1 pl-4 focus:outline-greenLight bg-greenLightDying' /><br/>
 
                     {/* email input */}
                     <label>username: </label><br/>
-                    <input onChange={(e) => setUsername(e.target.value)} defaultValue={userInfo.username} type="text" className='xl:w-72 xl:border xl:py-1 xl:pl-4 xl:focus:outline-greenLight xl:bg-greenLightDying'/><br/>
+                    <input onChange={(e) => setUsername(e.target.value)} defaultValue={userInfo.username} type="text" className='w-72 lg:w-64 border py-1 pl-4 focus:outline-greenLight bg-greenLightDying'/><br/>
 
-                    <button className='xl:p-2 xl:bg-greenLight xl:text-white xl:rounded-sm xl:mt-4'>Change</button>
+                    <button className='p-2 bg-greenLight text-white rounded-sm mt-4'>Change</button>
                 </form>
             </div>
         </div>

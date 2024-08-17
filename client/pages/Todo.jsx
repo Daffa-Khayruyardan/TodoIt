@@ -29,23 +29,23 @@ const Todo = () => {
     const {data} = useFetch(`http://localhost:3000/api/todo/${currId}`);
 
     return(
-        <div className="xl:flex-1 xl:ml-[17em] bg-silverLight">
+        <div className="flex-1 lg:ml-[15.6em] ml-[20em] bg-silverLight">
             {/* title container */}
-            <div className="xl:h-10 xl:flex xl:justify-between xl:items-center xl:pb-[0.8em] xl:pr-[4em]">
+            <div className="h-10 flex justify-between items-center pb-[0.8em] pr-[4em]">
                 {/* title of pages */}
-                <h1 className="xl:ml-[2em] xl:font-bold xl:pt-[1em] xl:text-xl">Inbox</h1>
+                <h1 className="ml-[2em] font-bold pt-[1em] text-">Inbox</h1>
 
                 {/* search input */}
-                <div className="xl:relative xl:mt-[1em]">
-                    <input onChange={(e) => setSearchValue(e.target.value)} type="text" placeholder="search" className="xl:focus:outline-greenLight xl:pl-[2.5em] xl:relative xl:rounded-2xl xl:w-[14em] xl:h-[2em]" />
+                <div className="relative mt-[1em]">
+                    <input onChange={(e) => setSearchValue(e.target.value)} type="text" placeholder="search" className="focusoutline-greenLight pl-[2.5em] relative rounded-2xl w-[14em] h-[2em]" />
 
                     {/* search icon */}
-                    <FaSearch size={15} className="xl:absolute xl:top-[0.6em] xl:left-4" />
+                    <FaSearch size={15} className="absolute top-[0.6em] left-4" />
                 </div>
             </div>
 
             {/* container content */}
-            <div className="xl:h-[94vh] xl:overflow-y-scroll xl:flex-1 ">
+            <div className="h-[94vh] overflow-y-scroll flex-1 ">
                 {/* todo content here */}
                 {Object.values(data).filter(item => {
                     // filter item from search bar 

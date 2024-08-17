@@ -61,39 +61,39 @@ const Register = () => {
     }   
 
     return(
-        <div className="xl:flex xl:flex-col xl:flex-1 xl:fixed right-[10em] xl:items-center">
+        <div className="flex flex-col flex-1 fixed right-[10em] lg:right-[6.4em] items-center">
             {/* app icons */}
-            <LuListTodo size={60} color="#59e3b9" className="xl:mt-[3.2em]" />
+            <LuListTodo size={60} color="#59e3b9" className="mt-[3.2em]" />
 
             {/* title */}
-            <h1 className="xl:mt-[1.8em] xl:text-xl xl:font-bold">Hello, fellow student</h1>
+            <h1 className="mt-[1.8em] text-xl font-bold">Hello, fellow student</h1>
  
             {/*  description */}
-            <h3 className="xl:mt-[0.5em] xl:text-sm">Todo app here now to help student manage daily task</h3>
+            <h3 className="mt-[0.5em] text-sm">Todo app here now to help student manage daily task</h3>
 
             {/* error message email*/}
-            <div className={`${errorDisplay ? "" : "hidden"} xl:mt-[1.2em] xl:bg-red-200 xl:border-2 xl:pl-5 xl:pt-2 xl:pb-2 xl:border-red-600 xl:w-[20em]`}>
+            <div className={`${errorDisplay ? "" : "hidden"} mt-[1.2em] bg-red-200 border-2 pl-5 pt-2 pb-2 border-red-600 w-[20em]`}>
                 {errorMSGContent}
             </div>
 
             {/* create login form */}
-            <form onSubmit={handleSignup} className="xl:mt-[1.2em] xl:flex xl:flex-col ">
+            <form onSubmit={handleSignup} className="mt-[1.2em] flex flex-col ">
                 {/* input email */}
-                <input onChange={(e) => setEmail(e.target.value)} className="xl:border xl:focus:outline-greenLight xl:bg-greenLightDying xl:p-1 xl:mt-[0.7em] xl:pl-[0.8em] xl:rounded-sm xl:w-[20em] xl:h-[2.4em]" placeholder="Email" name="email" type="text"/>
+                <input onChange={(e) => setEmail(e.target.value)} className="border focus:outline-greenLight bg-greenLightDying p-1 mt-[0.7em] pl-[0.8em] rounded-sm lg:w-[17em] w-[20em] h-[2.4em]" placeholder="Email" name="email" type="text"/>
                 
                 {/* input username */}
-                <input onChange={(e) => setUsername(e.target.value)} className="xl:border xl:focus:outline-greenLight xl:bg-greenLightDying xl:p-1 mt-[0.7em] xl:pl-[0.8em] xl:rounded-sm w-[20em] xl:h-[2.4em]" placeholder="Username" name="username" type="text"/>
+                <input onChange={(e) => setUsername(e.target.value)} className="border focus:outline-greenLight bg-greenLightDying p-1 mt-[0.7em] pl-[0.8em] rounded-sm lg:w-[17em] w-[20em] h-[2.4em]" placeholder="Username" name="username" type="text"/>
 
                 {/* input password */}
-                <input onChange={(e) => setPassword(e.target.value)} className="xl:border xl:focus:outline-greenLight xl:bg-greenLightDying xl:p-1 mt-[0.7em] xl:pl-[0.8em] xl:rounded-sm w-[20em] xl:h-[2.4em]" placeholder="Password" name="password" type="text"/>
+                <input onChange={(e) => setPassword(e.target.value)} className="border focus:outline-greenLight bg-greenLightDying p-1 mt-[0.7em] pl-[0.8em] rounded-sm lg:w-[17em] w-[20em] h-[2.4em]" placeholder="Password" name="password" type="text"/>
 
                 {/* login button */}
-                <button type="submit" className="xl:mt-[1.4em] xl:h-[2.2em] xl:hover:bg-greenLightHover xl:duration-200 xl:bg-greenLight xl:rounded-sm xl:text-white xl:cursor-pointer">Submit</button>
+                <button type="submit" className="mt-[1.4em] h-[2.2em] hover:bg-greenLightHover duration-200 bg-greenLight rounded-sm text-white cursor-pointer">Submit</button>
 
                 {/* create account link */}
-                <h1 className="xl:flex xl:justify-center xl:items-center xl:mt-[4em] xl:text-sm">
+                <h1 className="flex justify-center items-center mt-[4em] text-sm">
                     Already have account? 
-                    <Link to="/login" type="submit" className="xl:pl-[1em] xl:text-greenLight">Log In</Link>
+                    <Link to="/login" type="submit" className="pl-[1em] text-greenLight">Log In</Link>
                 </h1>
             </form>
         </div>

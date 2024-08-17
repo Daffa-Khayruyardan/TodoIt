@@ -85,21 +85,7 @@ const login = async (req,res) => {
     }
 }
 
-// logout controller
-const logout = async (req,res) => {
-    // get id from parameter
-    const {id} = req.params;
-
-    console.log(id);
-
-    // clear current cookie
-    res.clearCookie(`${id}`, { httpOnly: true });
-
-    res.status(200).send("User has been log out");
-}
-
 module.exports = {
     signup,
     login,
-    logout
 }
